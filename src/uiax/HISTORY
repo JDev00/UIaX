@@ -5,3 +5,5 @@ Version 1.0.0
 ################
 
 * Moves UIa components into the UIaX project
+
+** requires UIa >= 2.0.0
