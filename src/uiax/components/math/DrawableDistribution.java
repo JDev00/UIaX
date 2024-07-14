@@ -5,8 +5,8 @@ import uia.core.rendering.geometry.Geometry;
 import uia.core.rendering.color.Color;
 import uia.core.rendering.Transform;
 import uia.core.rendering.Graphics;
+import uia.physical.Geometries;
 import uia.utility.MathUtility;
-import uia.utility.Geometries;
 import uia.physical.ui.Theme;
 
 import java.util.Objects;

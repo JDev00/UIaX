@@ -1,8 +1,8 @@
 package uiax.components;
 
 import uia.physical.ui.component.utility.ComponentUtility;
+import uia.physical.ui.component.text.ComponentText;
 import uia.core.ui.style.TextVerticalAlignment;
-import uia.physical.ui.component.ComponentText;
 import uia.physical.ui.component.WrapperView;
 import uia.physical.ui.group.ComponentGroup;
 import uia.core.rendering.geometry.Geometry;

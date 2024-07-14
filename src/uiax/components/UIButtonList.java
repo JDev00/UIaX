@@ -1,9 +1,9 @@
 package uiax.components;
 
 import uia.physical.ui.component.utility.ComponentUtility;
+import uia.physical.ui.component.text.ComponentText;
 import uia.core.ui.style.TextHorizontalAlignment;
 import uia.core.ui.style.TextVerticalAlignment;
-import uia.physical.ui.component.ComponentText;
 import uia.physical.ui.component.WrapperView;
 import uia.physical.ui.group.ComponentGroup;
 import uia.physical.ui.component.Component;
@@ -11,8 +11,8 @@ import uia.core.ui.style.StyleFunction;
 import uia.core.ui.callbacks.OnClick;
 import uia.core.basement.Callback;
 import uia.core.ui.style.Style;
+import uia.physical.Geometries;
 import uia.utility.MathUtility;
-import uia.utility.Geometries;
 import uia.core.ui.ViewGroup;
 import uia.physical.ui.Theme;
 import uia.core.ui.ViewText;

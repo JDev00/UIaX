@@ -3,7 +3,7 @@ package uiax.components.calendar;
 import uia.physical.ui.component.utility.ComponentUtility;
 import uia.core.ui.style.StyleFunction;
 import uia.core.ui.style.Style;
-import uia.utility.Geometries;
+import uia.physical.Geometries;
 import uia.physical.ui.Theme;
 import uia.core.ui.View;
 
