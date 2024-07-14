@@ -1,17 +1,17 @@
 package uiax.components;
 
 import uia.physical.ui.component.utility.ComponentUtility;
+import uia.core.rendering.geometry.GeometryCollection;
 import uia.physical.ui.component.text.ComponentText;
 import uia.core.ui.style.TextHorizontalAlignment;
+import uia.core.rendering.color.ColorCollection;
 import uia.core.ui.style.TextVerticalAlignment;
 import uia.physical.ui.component.WrapperView;
 import uia.physical.ui.group.ComponentGroup;
 import uia.physical.ui.component.Component;
 import uia.core.ui.style.Style;
-import uia.physical.Geometries;
 import uia.utility.MathUtility;
 import uia.core.ui.ViewGroup;
-import uia.physical.ui.Theme;
 import uia.core.ui.ViewText;
 import uia.core.ui.View;
 
@@ -37,17 +37,17 @@ public final class UIButtonFilled extends WrapperView {
         viewText.setInputConsumer(InputConsumer.SCREEN_TOUCH, false);
         viewText.getStyle()
                 .setTextAlignment(right ? TextHorizontalAlignment.LEFT : TextHorizontalAlignment.RIGHT)
-                .setTextAlignment(TextVerticalAlignment.CENTER)
-                .setBackgroundColor(Theme.TRANSPARENT);
+                .setBackgroundColor(ColorCollection.TRANSPARENT)
+                .setTextAlignment(TextVerticalAlignment.CENTER);
 
         icon = new Component("BUTTON_FILLED_ICON_" + getID(), right ? 0.875f : 0.125f, 0.5f, 0.125f, 0.4f)
                 .setExpanseLimit(1.15f, 1.15f);
         icon.setColliderPolicy(ColliderPolicy.AABB);
         icon.setInputConsumer(InputConsumer.SCREEN_TOUCH, false);
         icon.getStyle()
-                .setGeometry(Geometries::arrow, false)
-                .setRotation(right ? 0f : MathUtility.PI)
-                .setBackgroundColor(Theme.BLACK);
+                .setGeometry(GeometryCollection::arrow, false)
+                .setBackgroundColor(ColorCollection.BLACK)
+                .setRotation(right ? 0f : MathUtility.PI);
 
         ViewGroup.insert(getView(), viewText, icon);
     }

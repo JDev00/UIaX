@@ -2,12 +2,12 @@ package uiax.components.list;
 
 import uiax.components.list.positioner.ViewPositionerFactory;
 import uiax.components.list.positioner.ViewPositioner;
+import uia.core.rendering.color.ColorCollection;
 import uia.physical.ui.component.WrapperView;
 import uia.physical.ui.group.ComponentGroup;
 import uia.physical.ui.component.Component;
 import uiax.components.UIScrollbar;
 import uia.core.ui.ViewGroup;
-import uia.physical.ui.Theme;
 import uia.core.ui.View;
 
 import java.util.Iterator;
@@ -41,7 +41,7 @@ public final class UIListView extends WrapperView implements ViewGroup {
         );
         verticalBar.setVisible(false);
         verticalBar.getStyle()
-                .setBackgroundColor(Theme.BLACK)
+                .setBackgroundColor(ColorCollection.BLACK)
                 .setMaxWidth(SCROLLBAR_THICKNESS)
                 .setMinWidth(SCROLLBAR_THICKNESS);
 
@@ -51,7 +51,7 @@ public final class UIListView extends WrapperView implements ViewGroup {
         );
         horizontalBar.setVisible(false);
         horizontalBar.getStyle()
-                .setBackgroundColor(Theme.BLACK)
+                .setBackgroundColor(ColorCollection.BLACK)
                 .setMaxHeight(SCROLLBAR_THICKNESS)
                 .setMinHeight(SCROLLBAR_THICKNESS);
 
@@ -59,7 +59,7 @@ public final class UIListView extends WrapperView implements ViewGroup {
                 new Component("LISTVIEW_SKELETON_" + getID(), 0.475f, 0.475f, 0.95f, 0.95f)
         );
         viewsContainer.setInputConsumer(InputConsumer.SCREEN_TOUCH, false);
-        viewsContainer.getStyle().setBackgroundColor(Theme.TRANSPARENT);
+        viewsContainer.getStyle().setBackgroundColor(ColorCollection.TRANSPARENT);
         viewsContainer.setClip(false);
 
         containerGroup = getView();

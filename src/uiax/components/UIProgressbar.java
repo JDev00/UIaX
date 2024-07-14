@@ -1,13 +1,13 @@
 package uiax.components;
 
 import uia.physical.ui.component.utility.ComponentUtility;
+import uia.core.rendering.color.ColorCollection;
 import uia.physical.ui.component.WrapperView;
 import uia.physical.ui.group.ComponentGroup;
 import uia.physical.ui.component.Component;
 import uia.utility.MathUtility;
 import uia.core.ui.style.Style;
 import uia.core.ui.ViewGroup;
-import uia.physical.ui.Theme;
 import uia.core.ui.View;
 
 import java.util.Objects;
@@ -35,7 +35,7 @@ public final class UIProgressbar extends WrapperView {
     public UIProgressbar(View view) {
         super(new ComponentGroup(view));
         getStyle()
-                .setBackgroundColor(Theme.DARK_GRAY)
+                .setBackgroundColor(ColorCollection.DARK_GRAY)
                 .setGeometry(
                         geometry -> ComponentUtility.buildRect(geometry, getWidth(), getHeight(), 1f),
                         true
@@ -43,7 +43,7 @@ public final class UIProgressbar extends WrapperView {
 
         internalBar = new Component("PROGRESSBAR_INTERNAL_BAR_" + getID(), 0.5f, 0.5f, 1f, 1f);
         internalBar.getStyle()
-                .setBackgroundColor(Theme.LIME)
+                .setBackgroundColor(ColorCollection.LIME)
                 .setGeometry(geometry -> {
                     float xVertex = value - 0.5f;
                     geometry.removeAllVertices().addVertices(

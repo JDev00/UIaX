@@ -1,14 +1,14 @@
 package uiax.components.math;
 
 import uia.physical.ui.component.utility.ComponentUtility;
+import uia.core.rendering.geometry.GeometryCollection;
+import uia.core.rendering.color.ColorCollection;
 import uia.physical.ui.component.WrapperView;
 import uia.core.rendering.geometry.Geometry;
 import uia.core.rendering.color.Color;
 import uia.core.rendering.Transform;
 import uia.core.rendering.Graphics;
-import uia.physical.Geometries;
 import uia.utility.MathUtility;
-import uia.physical.ui.Theme;
 import uia.core.ui.View;
 
 import java.util.ArrayList;
@@ -53,9 +53,9 @@ public class UIGraphic extends WrapperView {
 
         axisTransform = new Transform();
 
-        axisGeometry = Geometries.rect(new Geometry());
+        axisGeometry = GeometryCollection.rect(new Geometry());
 
-        axisColor = Theme.BLACK;
+        axisColor = ColorCollection.BLACK;
 
         reset();
     }

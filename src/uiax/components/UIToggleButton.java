@@ -2,6 +2,7 @@ package uiax.components;
 
 import uia.physical.ui.component.utility.ComponentUtility;
 import uia.physical.ui.component.text.ComponentText;
+import uia.core.rendering.color.ColorCollection;
 import uia.core.ui.style.TextVerticalAlignment;
 import uia.physical.ui.component.WrapperView;
 import uia.physical.ui.group.ComponentGroup;
@@ -9,10 +10,8 @@ import uia.core.rendering.geometry.Geometry;
 import uia.physical.ui.component.Component;
 import uia.core.ui.style.StyleFunction;
 import uia.core.ui.callbacks.OnClick;
-import uia.physical.ui.ThemeDarcula;
 import uia.core.ui.style.Style;
 import uia.core.ui.ViewGroup;
-import uia.physical.ui.Theme;
 import uia.core.ui.ViewText;
 import uia.core.ui.View;
 
@@ -55,13 +54,13 @@ public final class UIToggleButton extends WrapperView {
         enabledStateStyleFunction = style -> {
             Style containerStyle = getStyle();
             style.setTextColor(containerStyle.getBackgroundColor())
-                    .setBackgroundColor(ThemeDarcula.BLUE);
+                    .setBackgroundColor(DarculaColorCollection.BLUE);
         };
 
         disabledStateStyleFunction = style -> {
             Style enabledStateStyle = getEnabledStateStyle();
             style.setTextColor(enabledStateStyle.getBackgroundColor())
-                    .setBackgroundColor(Theme.TRANSPARENT);
+                    .setBackgroundColor(ColorCollection.TRANSPARENT);
         };
 
         setState(State.FIRST);

@@ -1,8 +1,10 @@
 package uiax.components.calendar;
 
 import uia.physical.ui.component.utility.ComponentUtility;
+import uia.core.rendering.geometry.GeometryCollection;
 import uia.physical.ui.component.text.ComponentText;
 import uia.core.ui.style.TextHorizontalAlignment;
+import uia.core.rendering.color.ColorCollection;
 import uia.core.ui.style.TextVerticalAlignment;
 import uia.physical.ui.component.WrapperView;
 import uia.physical.ui.group.ComponentGroup;
@@ -11,14 +13,13 @@ import uia.physical.ui.component.Component;
 import uia.core.rendering.color.Color;
 import uia.core.ui.callbacks.OnClick;
 import uia.core.rendering.font.Font;
-import uia.physical.ui.ThemeDarcula;
 import uia.core.ui.style.Style;
-import uia.physical.Geometries;
 import uia.utility.MathUtility;
 import uia.core.ui.ViewGroup;
-import uia.physical.ui.Theme;
 import uia.core.ui.ViewText;
 import uia.core.ui.View;
+
+import uiax.components.DarculaColorCollection;
 
 import java.util.function.Consumer;
 import java.util.GregorianCalendar;
@@ -38,7 +39,7 @@ public abstract class AbstractCalendarView extends WrapperView implements Calend
     private final CalendarCell[] cells = new CalendarCell[38];
     private final ViewGroup header;
     private final View overlayCell;
-    private Color currentDayColor = Theme.PINK;
+    private Color currentDayColor = ColorCollection.PINK;
     private final String[] months;
     private final Font font;
 
@@ -49,7 +50,7 @@ public abstract class AbstractCalendarView extends WrapperView implements Calend
 
     protected AbstractCalendarView(View view, String[] weekdays, String[] months) {
         super(new ComponentGroup(view));
-        getStyle().setBackgroundColor(ThemeDarcula.DARK_GRAY);
+        getStyle().setBackgroundColor(DarculaColorCollection.DARK_GRAY);
 
         this.months = months;
 
@@ -83,12 +84,12 @@ public abstract class AbstractCalendarView extends WrapperView implements Calend
 
         for (int i = 0; i < 7; i++) {
             cells[i] = CalendarCell.createWeekDay(weekdays[i]);
-            cells[i].getStyle().setTextColor(Theme.SILVER);
+            cells[i].getStyle().setTextColor(ColorCollection.SILVER);
         }
 
         for (int i = 0; i < 31; i++) {
             CalendarCell cell = CalendarCell.createDay(String.valueOf(i + 1));
-            cell.getStyle().setTextColor(Theme.WHITE);
+            cell.getStyle().setTextColor(ColorCollection.WHITE);
             cell.registerCallback((OnClick) touches -> {
                 int day = Integer.parseInt(cell.getText());
                 notifyCallbacks(OnDaySelect.class, day);
@@ -98,7 +99,7 @@ public abstract class AbstractCalendarView extends WrapperView implements Calend
 
         for (CalendarCell cell : cells) {
             cell.getStyle()
-                    .setBackgroundColor(Theme.TRANSPARENT)
+                    .setBackgroundColor(ColorCollection.TRANSPARENT)
                     .setFont(font);
         }
 
@@ -120,8 +121,8 @@ public abstract class AbstractCalendarView extends WrapperView implements Calend
                 new Component("HEADER", 0.5f, 0.15f, 0.75f, 0.2f)
         );
         result.getStyle()
-                .setBackgroundColor(Theme.TRANSPARENT)
-                .setTextColor(Theme.WHITE);
+                .setBackgroundColor(ColorCollection.TRANSPARENT)
+                .setTextColor(ColorCollection.WHITE);
 
         // group style
         Style groupStyle = result.getStyle();
@@ -135,7 +136,7 @@ public abstract class AbstractCalendarView extends WrapperView implements Calend
                 .setTextAlignment(TextVerticalAlignment.CENTER)
                 .setTextAlignment(TextHorizontalAlignment.LEFT)
                 .setTextColor(groupStyle.getTextColor())
-                .setBackgroundColor(Theme.TRANSPARENT)
+                .setBackgroundColor(ColorCollection.TRANSPARENT)
                 .setFont(font);
 
         // calendar header left arrow
@@ -144,7 +145,7 @@ public abstract class AbstractCalendarView extends WrapperView implements Calend
         leftArrow.registerCallback((OnClick) touches -> callback.accept(false));
         leftArrow.setColliderPolicy(ColliderPolicy.AABB);
         leftArrow.getStyle()
-                .setGeometry(Geometries::arrow, false)
+                .setGeometry(GeometryCollection::arrow, false)
                 .setTextColor(groupStyle.getBackgroundColor())
                 .setRotation(MathUtility.PI);
 
@@ -155,7 +156,7 @@ public abstract class AbstractCalendarView extends WrapperView implements Calend
         rightArrow.setColliderPolicy(ColliderPolicy.AABB);
         rightArrow.getStyle()
                 .setTextColor(groupStyle.getBackgroundColor())
-                .setGeometry(Geometries::arrow, false);
+                .setGeometry(GeometryCollection::arrow, false);
 
         // populates and returns header
         ViewGroup.insert(result, headerText, leftArrow, rightArrow);

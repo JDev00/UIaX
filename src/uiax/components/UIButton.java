@@ -1,10 +1,10 @@
 package uiax.components;
 
+import uia.core.rendering.color.ColorCollection;
 import uia.physical.ui.component.WrapperView;
 import uia.core.ui.style.StyleFunction;
 import uia.core.ui.callbacks.OnClick;
 import uia.core.basement.Callback;
-import uia.physical.ui.Theme;
 import uia.core.ui.View;
 
 import java.util.Objects;
@@ -28,8 +28,8 @@ public final class UIButton extends WrapperView {
         registerCallback((OnClick) touches -> enable(!isEnabled()));
 
         stateStyle = new StyleFunction[]{
-                style -> style.setBackgroundColor(Theme.RED),
-                style -> style.setBackgroundColor(Theme.LIME),
+                style -> style.setBackgroundColor(ColorCollection.RED),
+                style -> style.setBackgroundColor(ColorCollection.LIME),
         };
 
         enable(false);

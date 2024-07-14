@@ -2,6 +2,7 @@ package uiax.components;
 
 import uia.physical.ui.component.utility.ComponentUtility;
 import uia.physical.message.EventTouchScreenMessage;
+import uia.core.rendering.color.ColorCollection;
 import uia.physical.ui.component.WrapperView;
 import uia.physical.ui.group.ComponentGroup;
 import uia.physical.ui.component.Component;
@@ -12,7 +13,6 @@ import uia.core.ui.callbacks.OnClick;
 import uia.utility.MathUtility;
 import uia.core.ui.style.Style;
 import uia.core.ui.ViewGroup;
-import uia.physical.ui.Theme;
 import uia.core.ui.View;
 
 /**
@@ -48,7 +48,7 @@ public final class UIScrollbar extends WrapperView {
         this.vertical = vertical;
 
         getStyle()
-                .setBackgroundColor(Theme.DARK_GRAY)
+                .setBackgroundColor(ColorCollection.DARK_GRAY)
                 .setGeometry(
                         geometry -> ComponentUtility.buildRect(geometry, getWidth(), getHeight(), 1f),
                         true
@@ -78,7 +78,7 @@ public final class UIScrollbar extends WrapperView {
         internalBar = vertical ? createVerticalBar() : createHorizontalBar();
         internalBar.setInputConsumer(InputConsumer.SCREEN_TOUCH, false);
         internalBar.getStyle()
-                .setBackgroundColor(Theme.LIGHT_GRAY)
+                .setBackgroundColor(ColorCollection.LIGHT_GRAY)
                 .setGeometry(
                         geometry -> ComponentUtility.buildRect(geometry, internalBar.getWidth(), internalBar.getHeight(), 1f),
                         true

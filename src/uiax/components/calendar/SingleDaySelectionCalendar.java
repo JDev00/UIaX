@@ -1,10 +1,10 @@
 package uiax.components.calendar;
 
 import uia.physical.ui.component.utility.ComponentUtility;
+import uia.core.rendering.geometry.GeometryCollection;
+import uia.core.rendering.color.ColorCollection;
 import uia.core.ui.style.StyleFunction;
 import uia.core.ui.style.Style;
-import uia.physical.Geometries;
-import uia.physical.ui.Theme;
 import uia.core.ui.View;
 
 /**
@@ -13,11 +13,11 @@ import uia.core.ui.View;
 
 public class SingleDaySelectionCalendar extends AbstractCalendarView {
     private final StyleFunction deselectedCellPaint = style -> style
-            .setBackgroundColor(Theme.TRANSPARENT)
-            .setTextColor(Theme.WHITE);
+            .setBackgroundColor(ColorCollection.TRANSPARENT)
+            .setTextColor(ColorCollection.WHITE);
     private final StyleFunction selectedCellPaint = style -> style
-            .setBackgroundColor(Theme.ROYAL_BLUE)
-            .setTextColor(Theme.WHITE);
+            .setBackgroundColor(ColorCollection.ROYAL_BLUE)
+            .setTextColor(ColorCollection.WHITE);
 
     public SingleDaySelectionCalendar(View view, String[] weekdays, String[] months) {
         super(view, weekdays, months);
@@ -39,7 +39,7 @@ public class SingleDaySelectionCalendar extends AbstractCalendarView {
 
     private void deselectAllDays() {
         for (int i = 1; i <= 31; i++) {
-            setDayCellGeometry(i, Geometries::rect, false);
+            setDayCellGeometry(i, GeometryCollection::rect, false);
             markDayAsSelected(i, false);
         }
     }

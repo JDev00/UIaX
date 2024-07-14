@@ -1,8 +1,8 @@
 package uiax.components.loading;
 
+import uia.core.rendering.geometry.GeometryCollection;
 import uia.physical.ui.component.WrapperView;
 import uia.core.rendering.geometry.Geometry;
-import uia.physical.Geometries;
 import uia.utility.MathUtility;
 import uia.core.ui.View;
 
@@ -23,7 +23,7 @@ public final class UILoadingWheel extends WrapperView {
             if (Math.abs(rotation) >= MathUtility.TWO_PI) {
                 rotation = 0f;
             }
-            Geometry arc = Geometries.arc(geometry, 50, rotation, thickness);
+            Geometry arc = GeometryCollection.arc(geometry, 50, rotation, thickness);
             Geometry.rotate(arc, rotation);
             rotation += velocity;
         }, true);

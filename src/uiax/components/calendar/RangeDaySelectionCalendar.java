@@ -1,9 +1,9 @@
 package uiax.components.calendar;
 
+import uia.core.rendering.geometry.GeometryCollection;
+import uia.core.rendering.color.ColorCollection;
 import uia.core.ui.style.StyleFunction;
 import uia.core.ui.style.Style;
-import uia.physical.Geometries;
-import uia.physical.ui.Theme;
 import uia.core.ui.View;
 
 /**
@@ -12,11 +12,11 @@ import uia.core.ui.View;
 
 public class RangeDaySelectionCalendar extends AbstractCalendarView {
     private final StyleFunction deselectedCellPaint = style -> style
-            .setBackgroundColor(Theme.TRANSPARENT)
-            .setTextColor(Theme.WHITE);
+            .setBackgroundColor(ColorCollection.TRANSPARENT)
+            .setTextColor(ColorCollection.WHITE);
     private final StyleFunction selectedCellPaint = style -> style
-            .setBackgroundColor(Theme.ROYAL_BLUE)
-            .setTextColor(Theme.WHITE);
+            .setBackgroundColor(ColorCollection.ROYAL_BLUE)
+            .setTextColor(ColorCollection.WHITE);
 
     private final int[] range = {-1, -1};
 
@@ -72,7 +72,7 @@ public class RangeDaySelectionCalendar extends AbstractCalendarView {
     private void deselectsAllDays() {
         range[0] = range[1] = -1;
         for (int i = 1; i <= 31; i++) {
-            setDayCellGeometry(i, Geometries::rect, false);
+            setDayCellGeometry(i, GeometryCollection::rect, false);
             markDayAsSelected(i, false);
         }
     }
@@ -104,25 +104,42 @@ public class RangeDaySelectionCalendar extends AbstractCalendarView {
         int maxValue = Math.max(range[0], range[1]);
         for (int i = 1; i <= 31; i++) {
             markDayAsSelected(i, i == day || range[1] >= 0 && i >= minValue && i <= maxValue);
-            setDayCellGeometry(i, Geometries::rect, false);
+            setDayCellGeometry(i, GeometryCollection::rect, false);
         }
 
         // update cell geometry
         if (range[1] != -1) {
             setDayCellGeometry(
                     minValue,
-                    g -> Geometries.rect(g, Geometries.STD_VERT, 1f, 0f, 0f, 1f, getDayCelWidth() / getDayCelHeight()),
-                    true);
+                    geometry -> GeometryCollection.rect(
+                            geometry,
+                            GeometryCollection.STD_VERT,
+                            1f, 0f, 0f, 1f,
+                            getDayCelWidth() / getDayCelHeight()
+                    ),
+                    true
+            );
 
             setDayCellGeometry(
                     maxValue,
-                    g -> Geometries.rect(g, Geometries.STD_VERT, 0f, 1f, 1f, 0f, getDayCelWidth() / getDayCelHeight()),
-                    true);
+                    geometry -> GeometryCollection.rect(
+                            geometry,
+                            GeometryCollection.STD_VERT,
+                            0f, 1f, 1f, 0f,
+                            getDayCelWidth() / getDayCelHeight()
+                    ),
+                    true
+            );
 
             if (range[0] == range[1]) {
                 setDayCellGeometry(
                         range[0],
-                        g -> Geometries.rect(g, Geometries.STD_VERT, 1f, getDayCelWidth() / getDayCelHeight()),
+                        geometry -> GeometryCollection.rect(
+                                geometry,
+                                GeometryCollection.STD_VERT,
+                                1f,
+                                getDayCelWidth() / getDayCelHeight()
+                        ),
                         true);
             }
         }

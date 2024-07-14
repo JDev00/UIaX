@@ -1,13 +1,13 @@
 package uiax.components.math;
 
 import uia.physical.ui.component.utility.ComponentUtility;
+import uia.core.rendering.geometry.GeometryCollection;
+import uia.core.rendering.color.ColorCollection;
 import uia.core.rendering.geometry.Geometry;
 import uia.core.rendering.color.Color;
 import uia.core.rendering.Transform;
 import uia.core.rendering.Graphics;
-import uia.physical.Geometries;
 import uia.utility.MathUtility;
-import uia.physical.ui.Theme;
 
 import java.util.Objects;
 
@@ -27,12 +27,12 @@ public class DrawableDistribution extends PointDistribution {
     private boolean enablePoint = true;
 
     public DrawableDistribution() {
-        geometryMarker = Geometries.rect(new Geometry());
+        geometryMarker = GeometryCollection.rect(new Geometry());
 
         markerTransform = new Transform();
 
-        lineColor = Theme.BLACK;
-        pointColor = Theme.RED;
+        lineColor = ColorCollection.BLACK;
+        pointColor = ColorCollection.RED;
     }
 
     // point

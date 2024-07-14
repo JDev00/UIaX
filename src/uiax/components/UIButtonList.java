@@ -1,8 +1,10 @@
 package uiax.components;
 
 import uia.physical.ui.component.utility.ComponentUtility;
+import uia.core.rendering.geometry.GeometryCollection;
 import uia.physical.ui.component.text.ComponentText;
 import uia.core.ui.style.TextHorizontalAlignment;
+import uia.core.rendering.color.ColorCollection;
 import uia.core.ui.style.TextVerticalAlignment;
 import uia.physical.ui.component.WrapperView;
 import uia.physical.ui.group.ComponentGroup;
@@ -11,10 +13,8 @@ import uia.core.ui.style.StyleFunction;
 import uia.core.ui.callbacks.OnClick;
 import uia.core.basement.Callback;
 import uia.core.ui.style.Style;
-import uia.physical.Geometries;
 import uia.utility.MathUtility;
 import uia.core.ui.ViewGroup;
-import uia.physical.ui.Theme;
 import uia.core.ui.ViewText;
 import uia.core.ui.View;
 
@@ -72,7 +72,7 @@ public final class UIButtonList extends WrapperView {
         viewText.setInputConsumer(InputConsumer.SCREEN_TOUCH, false);
         viewText.getStyle()
                 .setTextAlignment(TextVerticalAlignment.CENTER)
-                .setBackgroundColor(Theme.TRANSPARENT);
+                .setBackgroundColor(ColorCollection.TRANSPARENT);
 
         View leftArrow = new Component("BUTTON_LIST_LEFT_" + getID(), 0.1f, 0.5f, 0.1f, 0.5f)
                 .setExpanseLimit(1.2f, 1.2f);
@@ -80,8 +80,8 @@ public final class UIButtonList extends WrapperView {
         leftArrow.setInputConsumer(InputConsumer.SCREEN_TOUCH, false);
         leftArrow.setColliderPolicy(ColliderPolicy.AABB);
         leftArrow.getStyle()
-                .setGeometry(Geometries::arrow, false)
-                .setBackgroundColor(Theme.BLACK)
+                .setGeometry(GeometryCollection::arrow, false)
+                .setBackgroundColor(ColorCollection.BLACK)
                 .setRotation(MathUtility.PI);
 
         View rightArrow = new Component("BUTTON_LIST_RIGHT_" + getID(), 0.9f, 0.5f, 0.1f, 0.5f)
@@ -90,8 +90,8 @@ public final class UIButtonList extends WrapperView {
         rightArrow.setInputConsumer(InputConsumer.SCREEN_TOUCH, false);
         rightArrow.setColliderPolicy(ColliderPolicy.AABB);
         rightArrow.getStyle()
-                .setGeometry(Geometries::arrow, false)
-                .setBackgroundColor(Theme.BLACK);
+                .setGeometry(GeometryCollection::arrow, false)
+                .setBackgroundColor(ColorCollection.BLACK);
 
         ViewGroup.insert(getView(), viewText, leftArrow, rightArrow);
     }
