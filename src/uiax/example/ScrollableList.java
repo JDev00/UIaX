@@ -1,13 +1,13 @@
 package uiax.example;
 
-import uia.core.rendering.color.ColorCollection;
-import uia.core.ui.ViewText;
-import uia.physical.ui.component.WrapperView;
 import uia.physical.ui.component.text.ComponentText;
+import uia.core.rendering.color.ColorCollection;
+import uia.physical.ui.component.WrapperView;
 import uia.physical.ui.group.ComponentGroup;
 import uia.physical.ui.component.Component;
 import uia.core.context.Context;
 import uia.core.ui.ViewGroup;
+import uia.core.ui.ViewText;
 import uia.core.ui.View;
 
 import uiax.components.list.UIListView;
