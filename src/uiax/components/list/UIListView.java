@@ -6,6 +6,7 @@ import uia.core.rendering.color.ColorCollection;
 import uia.physical.ui.component.WrapperView;
 import uia.physical.ui.group.ComponentGroup;
 import uia.physical.ui.component.Component;
+import uia.core.rendering.color.Color;
 import uiax.components.UIScrollbar;
 import uia.core.ui.ViewGroup;
 import uia.core.ui.View;
@@ -19,7 +20,8 @@ import java.util.Iterator;
  */
 
 public final class UIListView extends WrapperView implements ViewGroup {
-    private static final float SCROLLBAR_THICKNESS = 12f;
+    private static final Color SCROLLBAR_BACKGROUND = Color.createColor(0, 0, 0, 110);
+    private static final float SCROLLBAR_THICKNESS = 15f;
 
     private final UIScrollbar horizontalBar;
     private final UIScrollbar verticalBar;
@@ -36,27 +38,28 @@ public final class UIListView extends WrapperView implements ViewGroup {
         viewPositioner = ViewPositionerFactory.create(this, 1.01f, true);
 
         verticalBar = new UIScrollbar(
-                new Component("VERTICAL_BAR", 0.975f, 0.5f, 0.03f, 0.98f),
+                new Component("VERTICAL_SCROLLBAR_" + getID(), 0f, 0f, 0f, 0.995f),
                 true
         );
+        verticalBar.setInputConsumer(InputConsumer.SCREEN_TOUCH, true);
         verticalBar.setVisible(false);
         verticalBar.getStyle()
-                .setBackgroundColor(ColorCollection.BLACK)
+                .setBackgroundColor(SCROLLBAR_BACKGROUND)
                 .setMaxWidth(SCROLLBAR_THICKNESS)
                 .setMinWidth(SCROLLBAR_THICKNESS);
 
         horizontalBar = new UIScrollbar(
-                new Component("HORIZONTAL_BAR", 0.5f, 0.975f, 0.9f, 0.05f),
+                new Component("HORIZONTAL_SCROLLBAR_" + getID(), 0f, 0f, 0f, 0f),
                 false
         );
         horizontalBar.setVisible(false);
         horizontalBar.getStyle()
-                .setBackgroundColor(ColorCollection.BLACK)
+                .setBackgroundColor(SCROLLBAR_BACKGROUND)
                 .setMaxHeight(SCROLLBAR_THICKNESS)
                 .setMinHeight(SCROLLBAR_THICKNESS);
 
         viewsContainer = new ComponentGroup(
-                new Component("SKELETON" + getID(), 0.475f, 0.475f, 0.95f, 0.95f)
+                new Component("SKELETON" + getID(), 0.5f, 0.5f, 1f, 1f)
         );
         viewsContainer.setInputConsumer(InputConsumer.SCREEN_TOUCH, false);
         viewsContainer.getStyle().setBackgroundColor(ColorCollection.TRANSPARENT);
@@ -163,37 +166,77 @@ public final class UIListView extends WrapperView implements ViewGroup {
         }
     }
 
+    /**
+     * Helper function. Updates the horizontal scrollbar.
+     * <p>
+     * Depends on vertical scrollbar. Vertical scrollbar must be updated first.
+     */
+
+    private void updateHorizontalScrollbar(float[] bounds, float[] boundsContent) {
+        float width = Math.max(0f, boundsContent[2] - bounds[2]);
+        float offsetX = Math.max(0f, width / bounds[2]);
+
+        barWidth = 1f / (offsetX + 1f);
+        horizontalBar.setVisible(barWidth < 1f);
+
+        if (horizontalBar.isVisible()) {
+            boolean verticalBarVisible = verticalBar.isVisible();
+            float normalizedVerticalBarWidth = SCROLLBAR_THICKNESS / bounds[2];
+
+            float horizontalBarWidth = verticalBarVisible ? 1f - normalizedVerticalBarWidth : 1f;
+            horizontalBar.setDimension(horizontalBarWidth, 0f);
+
+            float horizontalBarPositionX = verticalBarVisible ? 0.5f - normalizedVerticalBarWidth / 2 : 0.5f;
+            float normalizedScrollbarHeight = SCROLLBAR_THICKNESS / bounds[3];
+            horizontalBar.setPosition(
+                    horizontalBarPositionX,
+                    1f - 0.5f * normalizedScrollbarHeight
+            );
+            horizontalBar.setMaxValue(width);
+        }
+    }
+
+    /**
+     * Helper function. Updates the vertical scrollbar.
+     */
+
+    private void updateVerticalScrollbar(float[] bounds, float[] boundsContent) {
+        float height = Math.max(0f, boundsContent[3] - bounds[3]);
+        float offsetY = Math.max(0f, height / bounds[3]);
+
+        barHeight = 1f / (offsetY + 1f);
+        verticalBar.setVisible(barHeight < 1f);
+
+        if (verticalBar.isVisible()) {
+            verticalBar.setPosition(1f - 0.5f * SCROLLBAR_THICKNESS / bounds[2], 0.5f);
+            verticalBar.setMaxValue(height);
+        }
+    }
+
     @Override
     public void update(View parent) {
         horizontalBar.setInternalBarSize(barWidth);
         verticalBar.setInternalBarSize(barHeight);
+
         super.update(parent);
 
-        // TODO: quick fix. It needs to be studied further.
+        // updates the component a second time.
+        // It needs to be studied further.
         updatePositioner();
         super.update(parent);
 
         if (isVisible()) {
             float[] bounds = getBounds();
             float[] boundsContent = viewsContainer.boundsContent();
-            float width = Math.max(0f, boundsContent[2] - bounds[2]);
-            float height = Math.max(0f, boundsContent[3] - bounds[3]);
-            float offsetX = Math.max(0f, width / bounds[2]);
-            float offsetY = Math.max(0f, height / bounds[3]);
 
-            barWidth = 1f / (offsetX + 1f);
-            barHeight = 1f / (offsetY + 1f);
+            // updates scrollbars
+            updateVerticalScrollbar(bounds, boundsContent);
+            updateHorizontalScrollbar(bounds, boundsContent);
 
-            horizontalBar.setVisible(barWidth < 1f);
-            horizontalBar.setMaxValue(width);
-
-            verticalBar.setVisible(barHeight < 1f);
-            verticalBar.setMaxValue(height);
-
-            float vx = verticalBar.isVisible() ? 0.475f : 0.5f;
+            // adjusts the container position according to the scroll value
             viewsContainer.setPosition(
-                    vx - horizontalBar.getValue() / getBounds()[2],
-                    0.475f - verticalBar.getValue() / getBounds()[3]
+                    0.5f - horizontalBar.getValue() / bounds[2],
+                    0.5f - verticalBar.getValue() / bounds[3]
             );
         }
     }
