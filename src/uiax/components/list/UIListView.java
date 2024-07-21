@@ -36,7 +36,7 @@ public final class UIListView extends WrapperView implements ViewGroup {
         viewPositioner = ViewPositionerFactory.create(this, 1.01f, true);
 
         verticalBar = new UIScrollbar(
-                new Component("LISTVIEW_VERTICAL_BAR_" + getID(), 0.975f, 0.5f, 0.03f, 0.98f),
+                new Component("VERTICAL_BAR", 0.975f, 0.5f, 0.03f, 0.98f),
                 true
         );
         verticalBar.setVisible(false);
@@ -46,7 +46,7 @@ public final class UIListView extends WrapperView implements ViewGroup {
                 .setMinWidth(SCROLLBAR_THICKNESS);
 
         horizontalBar = new UIScrollbar(
-                new Component("LISTVIEW_HORIZONTAL_BAR_" + getID(), 0.5f, 0.975f, 0.9f, 0.05f),
+                new Component("HORIZONTAL_BAR", 0.5f, 0.975f, 0.9f, 0.05f),
                 false
         );
         horizontalBar.setVisible(false);
@@ -56,7 +56,7 @@ public final class UIListView extends WrapperView implements ViewGroup {
                 .setMinHeight(SCROLLBAR_THICKNESS);
 
         viewsContainer = new ComponentGroup(
-                new Component("LISTVIEW_SKELETON_" + getID(), 0.475f, 0.475f, 0.95f, 0.95f)
+                new Component("SKELETON" + getID(), 0.475f, 0.475f, 0.95f, 0.95f)
         );
         viewsContainer.setInputConsumer(InputConsumer.SCREEN_TOUCH, false);
         viewsContainer.getStyle().setBackgroundColor(ColorCollection.TRANSPARENT);
