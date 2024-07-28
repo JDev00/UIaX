@@ -1,14 +1,14 @@
 package uiax.components;
 
-import uia.physical.ui.component.utility.ComponentUtility;
+import uia.application.ui.component.utility.ComponentUtility;
+import uia.application.ui.component.text.ComponentText;
 import uia.core.rendering.geometry.GeometryCollection;
-import uia.physical.ui.component.text.ComponentText;
 import uia.core.ui.style.TextHorizontalAlignment;
+import uia.application.ui.component.WrapperView;
 import uia.core.rendering.color.ColorCollection;
+import uia.application.ui.group.ComponentGroup;
 import uia.core.ui.style.TextVerticalAlignment;
-import uia.physical.ui.component.WrapperView;
-import uia.physical.ui.group.ComponentGroup;
-import uia.physical.ui.component.Component;
+import uia.application.ui.component.Component;
 import uia.core.ui.style.Style;
 import uia.utility.MathUtility;
 import uia.core.ui.ViewGroup;

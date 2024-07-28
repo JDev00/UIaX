@@ -1,11 +1,11 @@
 package uiax.components;
 
-import uia.physical.ui.component.utility.ComponentUtility;
-import uia.physical.message.EventTouchScreenMessage;
+import uia.application.ui.component.utility.ComponentUtility;
+import uia.application.message.EventTouchScreenMessage;
+import uia.application.ui.component.WrapperView;
 import uia.core.rendering.color.ColorCollection;
-import uia.physical.ui.component.WrapperView;
-import uia.physical.ui.group.ComponentGroup;
-import uia.physical.ui.component.Component;
+import uia.application.ui.group.ComponentGroup;
+import uia.application.ui.component.Component;
 import uia.core.ui.callbacks.OnMouseHover;
 import uia.core.ui.primitives.ScreenTouch;
 import uia.core.ui.callbacks.OnMouseExit;

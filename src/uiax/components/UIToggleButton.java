@@ -1,13 +1,13 @@
 package uiax.components;
 
-import uia.physical.ui.component.utility.ComponentUtility;
-import uia.physical.ui.component.text.ComponentText;
+import uia.application.ui.component.utility.ComponentUtility;
+import uia.application.ui.component.text.ComponentText;
+import uia.application.ui.component.WrapperView;
 import uia.core.rendering.color.ColorCollection;
+import uia.application.ui.group.ComponentGroup;
 import uia.core.ui.style.TextVerticalAlignment;
-import uia.physical.ui.component.WrapperView;
-import uia.physical.ui.group.ComponentGroup;
+import uia.application.ui.component.Component;
 import uia.core.rendering.geometry.Geometry;
-import uia.physical.ui.component.Component;
 import uia.core.ui.style.StyleFunction;
 import uia.core.ui.callbacks.OnClick;
 import uia.core.ui.style.Style;

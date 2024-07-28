@@ -1,7 +1,7 @@
 package uiax.components;
 
+import uia.application.ui.component.WrapperView;
 import uia.core.rendering.color.ColorCollection;
-import uia.physical.ui.component.WrapperView;
 import uia.core.ui.style.StyleFunction;
 import uia.core.ui.callbacks.OnClick;
 import uia.core.basement.Callback;

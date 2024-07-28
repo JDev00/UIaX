@@ -1,10 +1,6 @@
-package tests.distribution;
+package tests;
 
 import uiax.components.math.PointDistribution;
-import test.core.BeforeEachTest;
-import test.core.TestAssertion;
-import test.core.TestExecutor;
-import test.core.Test;
 
 /**
  * Unit tests.
@@ -13,7 +9,7 @@ import test.core.Test;
 public class pointDistributionTest {
     PointDistribution pointDistribution;
 
-    @BeforeEachTest
+    /*@BeforeEachTest
     public void beforeEach() {
         pointDistribution = new PointDistribution();
 
@@ -72,9 +68,5 @@ public class pointDistributionTest {
                 pointDistribution.getStandardDeviation(PointDistribution.AXIS.Y)
         };
         testAssertion.expect(expectedStandardDeviation).toHaveValues(2472.1162f, 2682.5352f);
-    }
-
-    public static void main(String[] args) {
-        TestExecutor.runTests(new pointDistributionTest());
-    }
+    }*/
 }

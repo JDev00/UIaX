@@ -1,15 +1,16 @@
 package uiax.components.list;
 
-import uiax.components.list.positioner.ViewPositionerFactory;
-import uiax.components.list.positioner.ViewPositioner;
+import uia.application.ui.component.WrapperView;
 import uia.core.rendering.color.ColorCollection;
-import uia.physical.ui.component.WrapperView;
-import uia.physical.ui.group.ComponentGroup;
-import uia.physical.ui.component.Component;
+import uia.application.ui.group.ComponentGroup;
+import uia.application.ui.component.Component;
 import uia.core.rendering.color.Color;
-import uiax.components.UIScrollbar;
 import uia.core.ui.ViewGroup;
 import uia.core.ui.View;
+
+import uiax.components.list.positioner.ViewPositionerFactory;
+import uiax.components.list.positioner.ViewPositioner;
+import uiax.components.UIScrollbar;
 
 import java.util.Iterator;
 

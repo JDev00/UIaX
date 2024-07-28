@@ -1,9 +1,9 @@
 package uiax.components.calendar;
 
-import uia.physical.ui.component.text.WrapperViewText;
-import uia.physical.ui.component.text.ComponentText;
+import uia.application.ui.component.text.WrapperViewText;
+import uia.application.ui.component.text.ComponentText;
 import uia.core.ui.style.TextVerticalAlignment;
-import uia.physical.ui.component.Component;
+import uia.application.ui.component.Component;
 import uia.core.ui.callbacks.OnMouseEnter;
 import uia.core.ui.callbacks.OnMouseExit;
 

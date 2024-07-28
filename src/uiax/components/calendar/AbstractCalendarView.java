@@ -1,15 +1,15 @@
 package uiax.components.calendar;
 
-import uia.physical.ui.component.utility.ComponentUtility;
+import uia.application.ui.component.utility.ComponentUtility;
+import uia.application.ui.component.text.ComponentText;
 import uia.core.rendering.geometry.GeometryCollection;
-import uia.physical.ui.component.text.ComponentText;
 import uia.core.ui.style.TextHorizontalAlignment;
+import uia.application.ui.component.WrapperView;
 import uia.core.rendering.color.ColorCollection;
+import uia.application.ui.group.ComponentGroup;
 import uia.core.ui.style.TextVerticalAlignment;
-import uia.physical.ui.component.WrapperView;
-import uia.physical.ui.group.ComponentGroup;
+import uia.application.ui.component.Component;
 import uia.core.rendering.geometry.Geometry;
-import uia.physical.ui.component.Component;
 import uia.core.rendering.color.Color;
 import uia.core.ui.callbacks.OnClick;
 import uia.core.rendering.font.Font;
@@ -69,7 +69,7 @@ public abstract class AbstractCalendarView extends WrapperView implements Calend
             }
             changeDate(month, year);
         };
-        header = createHeader(font, shiftDate);
+        header = createHeader(getID(), font, shiftDate);
         header.getStyle().setFont(font);
 
         overlayCell = new Component("CALENDAR_OVERLAY_" + getID(), 0f, 0f, 0f, 0f);
@@ -116,9 +116,9 @@ public abstract class AbstractCalendarView extends WrapperView implements Calend
      * Helper function. Creates the calendar header.
      */
 
-    private static ViewGroup createHeader(Font font, Consumer<Boolean> callback) {
+    private static ViewGroup createHeader(String id, Font font, Consumer<Boolean> callback) {
         ViewGroup result = new ComponentGroup(
-                new Component("HEADER", 0.5f, 0.15f, 0.75f, 0.2f)
+                new Component("CALENDAR_HEADER_" + id, 0.5f, 0.15f, 0.75f, 0.2f)
         );
         result.getStyle()
                 .setBackgroundColor(ColorCollection.TRANSPARENT)
@@ -129,9 +129,9 @@ public abstract class AbstractCalendarView extends WrapperView implements Calend
 
         // calendar header text
         ViewText headerText = new ComponentText(
-                new Component("TEXT", 0.35f, 0.5f, 0.7f, 1f)
+                new Component("CALENDAR_TEXT_" + id, 0.35f, 0.5f, 0.7f, 1f)
         );
-        headerText.setText("HEADER!");
+        headerText.setText("CALENDAR_HEADER_" + id);
         headerText.getStyle()
                 .setTextAlignment(TextVerticalAlignment.CENTER)
                 .setTextAlignment(TextHorizontalAlignment.LEFT)
@@ -140,7 +140,7 @@ public abstract class AbstractCalendarView extends WrapperView implements Calend
                 .setFont(font);
 
         // calendar header left arrow
-        View leftArrow = new Component("LEFT_ARROW", 0.75f, 0.5f, 0.05f, 0.4f)
+        View leftArrow = new Component("CALENDAR_LEFT_ARROW_" + id, 0.75f, 0.5f, 0.05f, 0.4f)
                 .setExpanseLimit(1.2f, 1.2f);
         leftArrow.registerCallback((OnClick) touches -> callback.accept(false));
         leftArrow.setColliderPolicy(ColliderPolicy.AABB);
@@ -150,7 +150,7 @@ public abstract class AbstractCalendarView extends WrapperView implements Calend
                 .setRotation(MathUtility.PI);
 
         // calendar header right arrow
-        View rightArrow = new Component("RIGHT_ARROW", 0.965f, 0.5f, 0.05f, 0.4f)
+        View rightArrow = new Component("CALENDAR_RIGHT_ARROW_" + id, 0.965f, 0.5f, 0.05f, 0.4f)
                 .setExpanseLimit(1.2f, 1.2f);
         rightArrow.registerCallback((OnClick) touches -> callback.accept(true));
         rightArrow.setColliderPolicy(ColliderPolicy.AABB);
@@ -356,7 +356,7 @@ public abstract class AbstractCalendarView extends WrapperView implements Calend
         }
 
         // update month
-        ViewText headerText = (ViewText) header.get("TEXT");
+        ViewText headerText = (ViewText) header.get("CALENDAR_TEXT_" + getID());
         headerText.setText(months[month - 1] + " " + year);
     }
 

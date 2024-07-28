@@ -1,6 +1,6 @@
 package uiax.components.calendar;
 
-import uia.physical.ui.component.utility.ComponentUtility;
+import uia.application.ui.component.utility.ComponentUtility;
 import uia.core.rendering.geometry.GeometryCollection;
 import uia.core.rendering.color.ColorCollection;
 import uia.core.ui.style.StyleFunction;

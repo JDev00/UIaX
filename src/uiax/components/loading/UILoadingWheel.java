@@ -1,7 +1,7 @@
 package uiax.components.loading;
 
 import uia.core.rendering.geometry.GeometryCollection;
-import uia.physical.ui.component.WrapperView;
+import uia.application.ui.component.WrapperView;
 import uia.core.rendering.geometry.Geometry;
 import uia.utility.MathUtility;
 import uia.core.ui.View;

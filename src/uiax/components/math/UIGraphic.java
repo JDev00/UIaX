@@ -1,9 +1,9 @@
 package uiax.components.math;
 
-import uia.physical.ui.component.utility.ComponentUtility;
+import uia.application.ui.component.utility.ComponentUtility;
 import uia.core.rendering.geometry.GeometryCollection;
 import uia.core.rendering.color.ColorCollection;
-import uia.physical.ui.component.WrapperView;
+import uia.application.ui.component.WrapperView;
 import uia.core.rendering.geometry.Geometry;
 import uia.core.rendering.color.Color;
 import uia.core.rendering.Transform;
