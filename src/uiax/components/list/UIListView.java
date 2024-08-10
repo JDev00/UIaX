@@ -146,13 +146,25 @@ public final class UIListView extends WrapperView implements ViewGroup {
     /**
      * Sets the current scroll value.
      *
-     * @param x the scroll value on the x-axis between [0, group content width]
-     * @param y the scroll value on the y-axis between [0, group content height]
+     * @param x the scroll value on the x-axis between [0, contentWidth]
+     * @param y the scroll value on the y-axis between [0, contentHeight]
      */
 
     public void setScrollValue(float x, float y) {
         horizontalBar.setValue(x);
         verticalBar.setValue(y);
+    }
+
+    /**
+     * @return the scroll values on the x-axis between [0, contentWidth]
+     * and on the y-axis between [0, contentHeight]
+     */
+
+    public float[] getScrollValue() {
+        return new float[]{
+                horizontalBar.getValue(),
+                verticalBar.getValue()
+        };
     }
 
     /**
@@ -220,7 +232,6 @@ public final class UIListView extends WrapperView implements ViewGroup {
         verticalBar.setInternalBarSize(barHeight);
 
         super.update(parent);
-
         // updates the component a second time.
         // It needs to be studied further.
         updatePositioner();
