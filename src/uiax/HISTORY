@@ -1,4 +1,10 @@
-UIaX current version is 1.0.0
+UIaX current version is 1.0.1
+
+################
+Version 1.0.1
+################
+
+* Bugfix: resets UIListView scroll values when all entries are removed
 
 ################
 Version 1.0.0
