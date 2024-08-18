@@ -38,8 +38,9 @@ public final class UIScrollbar extends WrapperView {
     private float val;
     private float max = 1f;
     private float barDragOffset;
-    private boolean locked = false;
+
     private final boolean vertical;
+    private boolean locked = false;
     private boolean updateInternalBar = false;
 
     public UIScrollbar(View view, boolean vertical) {
@@ -79,9 +80,11 @@ public final class UIScrollbar extends WrapperView {
         internalBar.setInputConsumer(InputConsumer.SCREEN_TOUCH, false);
         internalBar.getStyle()
                 .setBackgroundColor(ColorCollection.LIGHT_GRAY)
-                .setGeometry(
-                        geometry -> ComponentUtility.buildRect(geometry, internalBar.getWidth(), internalBar.getHeight(), 1f),
-                        true
+                .setGeometry(geometry -> ComponentUtility.buildRect(
+                        geometry,
+                        internalBar.getWidth(),
+                        internalBar.getHeight(),
+                        1f), true
                 );
 
         ViewGroup group = getView();
@@ -253,6 +256,17 @@ public final class UIScrollbar extends WrapperView {
 
     public void scroll(float scrollAmount) {
         setValue(val + scrollAmount);
+    }
+
+    /**
+     * Resets the scroll and the max value of this scrollbar.
+     */
+
+    public void reset() {
+        releaseLock();
+        barDragOffset = 0f;
+        val = 0f;
+        max = 0f;
     }
 
     @Override

@@ -103,8 +103,8 @@ public final class UIListView extends WrapperView implements ViewGroup {
         viewsContainer.removeAll();
 
         // resets scrollbars value
-        horizontalBar.setValue(0f);
-        verticalBar.setValue(0f);
+        horizontalBar.reset();
+        verticalBar.reset();
     }
 
     @Override
