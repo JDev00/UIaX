@@ -54,9 +54,9 @@ public abstract class AbstractCalendarView extends WrapperView implements Calend
 
         font = Font.createDesktopFont(Font.FontStyle.ITALIC);
 
-        Consumer<Boolean> shiftDate = next -> {
-            int offset = next ? 1 : -1;
-            int month = currentDate[1] + offset;
+        Consumer<Boolean> shiftDate = isNextMonth -> {
+            int monthOffset = Boolean.TRUE.equals(isNextMonth) ? 1 : -1;
+            int month = currentDate[1] + monthOffset;
             int year = currentDate[2];
             if (month > 12) {
                 month = 1;
@@ -341,9 +341,9 @@ public abstract class AbstractCalendarView extends WrapperView implements Calend
         }
 
         int day = 0;
-        int[] setDate = getSetDate();
-        if (setDate[1] == month && setDate[2] == year) {
-            day = setDate[0];
+        int[] dateSet = getSetDate();
+        if (dateSet[1] == month && dateSet[2] == year) {
+            day = dateSet[0];
         }
 
         updateDate(day, month, year);
