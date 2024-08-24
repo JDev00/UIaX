@@ -1,4 +1,4 @@
-package uiax.components.calendar;
+package uiax.components.calendar.components;
 
 import uia.application.ui.component.text.WrapperViewText;
 import uia.application.ui.component.text.ComponentText;

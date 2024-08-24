@@ -1,4 +1,4 @@
-package uiax.components.calendar;
+package uiax.components.calendar.components;
 
 import uia.application.ui.component.utility.ComponentUtility;
 import uia.application.ui.component.text.ComponentText;
@@ -19,6 +19,8 @@ import uia.core.ui.ViewGroup;
 import uia.core.ui.ViewText;
 import uia.core.ui.View;
 
+import uiax.components.calendar.CalendarUtility;
+import uiax.components.calendar.CalendarView;
 import uiax.components.calendar.callbacks.OnDateChanged;
 import uiax.components.calendar.callbacks.OnDaySelected;
 import uiax.components.calendar.callbacks.OnDateSet;
@@ -420,5 +422,15 @@ public abstract class AbstractCalendarView extends WrapperView implements Calend
         return IntStream.range(1, 32)
                 .filter(index -> cells[7 + index - 1].selected)
                 .toArray();
+    }
+
+    @Override
+    public void markDayWithTask(int day, boolean hasTask) {
+
+    }
+
+    @Override
+    public boolean hasTask(int day) {
+        return false;
     }
 }
