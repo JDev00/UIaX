@@ -1,29 +1,24 @@
 package uiax.components.calendar.components;
 
 import uia.application.ui.component.utility.ComponentUtility;
-import uia.application.ui.component.text.ComponentText;
-import uia.core.rendering.geometry.GeometryCollection;
-import uia.core.ui.style.TextHorizontalAlignment;
 import uia.application.ui.component.WrapperView;
 import uia.core.rendering.color.ColorCollection;
 import uia.application.ui.group.ComponentGroup;
-import uia.core.ui.style.TextVerticalAlignment;
 import uia.application.ui.component.Component;
 import uia.core.rendering.geometry.Geometry;
 import uia.core.rendering.color.Color;
 import uia.core.ui.callbacks.OnClick;
 import uia.core.rendering.font.Font;
 import uia.core.ui.style.Style;
-import uia.utility.MathUtility;
 import uia.core.ui.ViewGroup;
 import uia.core.ui.ViewText;
 import uia.core.ui.View;
 
-import uiax.components.calendar.CalendarUtility;
-import uiax.components.calendar.CalendarView;
 import uiax.components.calendar.callbacks.OnDateChanged;
 import uiax.components.calendar.callbacks.OnDaySelected;
 import uiax.components.calendar.callbacks.OnDateSet;
+import uiax.components.calendar.CalendarUtility;
+import uiax.components.calendar.CalendarView;
 import uiax.colors.DarculaColorCollection;
 
 import java.util.function.Consumer;
@@ -42,7 +37,7 @@ public abstract class AbstractCalendarView extends WrapperView implements Calend
     private final Calendar calendar = GregorianCalendar.getInstance();
 
     private final CalendarCell[] cells = new CalendarCell[38];
-    private final ViewGroup header;
+    private final CalendarHeader header;
     private final View overlayCell;
     private Color currentDayColor = ColorCollection.PINK;
     private final String[] months;
@@ -74,8 +69,10 @@ public abstract class AbstractCalendarView extends WrapperView implements Calend
             }
             changeDate(month, year);
         };
-        header = createHeader(getID(), font, shiftDate);
-        header.getStyle().setFont(font);
+        header = new CalendarHeader(
+                new Component("calendar_header_" + getID(), 0.5f, 0.15f, 0.75f, 0.2f),
+                font, shiftDate
+        );
 
         overlayCell = new Component("CALENDAR_OVERLAY_" + getID(), 0f, 0f, 0f, 0f);
         overlayCell.setInputConsumer(InputConsumer.SCREEN_TOUCH, false);
@@ -116,59 +113,6 @@ public abstract class AbstractCalendarView extends WrapperView implements Calend
         int[] currentDate = CalendarUtility.getDate();
         setDate(currentDate[0], currentDate[1], currentDate[2]);
     }
-
-    /**
-     * Helper function. Creates the calendar header.
-     */
-
-    private static ViewGroup createHeader(String id, Font font, Consumer<Boolean> callback) {
-        ViewGroup result = new ComponentGroup(
-                new Component("CALENDAR_HEADER_" + id, 0.5f, 0.15f, 0.75f, 0.2f)
-        );
-        result.getStyle()
-                .setBackgroundColor(ColorCollection.TRANSPARENT)
-                .setTextColor(ColorCollection.WHITE);
-
-        // group style
-        Style groupStyle = result.getStyle();
-
-        // calendar header text
-        ViewText headerText = new ComponentText(
-                new Component("CALENDAR_TEXT_" + id, 0.35f, 0.5f, 0.7f, 1f)
-        );
-        headerText.setText("CALENDAR_HEADER_" + id);
-        headerText.getStyle()
-                .setTextAlignment(TextVerticalAlignment.CENTER)
-                .setTextAlignment(TextHorizontalAlignment.LEFT)
-                .setTextColor(groupStyle.getTextColor())
-                .setBackgroundColor(ColorCollection.TRANSPARENT)
-                .setFont(font);
-
-        // calendar header left arrow
-        View leftArrow = new Component("CALENDAR_LEFT_ARROW_" + id, 0.75f, 0.5f, 0.05f, 0.4f)
-                .setExpanseLimit(1.2f, 1.2f);
-        leftArrow.registerCallback((OnClick) touches -> callback.accept(false));
-        leftArrow.setColliderPolicy(ColliderPolicy.AABB);
-        leftArrow.getStyle()
-                .setGeometry(GeometryCollection::arrow, false)
-                .setTextColor(groupStyle.getBackgroundColor())
-                .setRotation(MathUtility.PI);
-
-        // calendar header right arrow
-        View rightArrow = new Component("CALENDAR_RIGHT_ARROW_" + id, 0.965f, 0.5f, 0.05f, 0.4f)
-                .setExpanseLimit(1.2f, 1.2f);
-        rightArrow.registerCallback((OnClick) touches -> callback.accept(true));
-        rightArrow.setColliderPolicy(ColliderPolicy.AABB);
-        rightArrow.getStyle()
-                .setTextColor(groupStyle.getBackgroundColor())
-                .setGeometry(GeometryCollection::arrow, false);
-
-        // populates and returns header
-        ViewGroup.insert(result, headerText, leftArrow, rightArrow);
-        return result;
-    }
-
-    //
 
     /**
      * Marks the specified as selected.
@@ -360,9 +304,8 @@ public abstract class AbstractCalendarView extends WrapperView implements Calend
             markCurrentDateCell(currentDate[0]);
         }
 
-        // update month
-        ViewText headerText = (ViewText) header.get("CALENDAR_TEXT_" + getID());
-        headerText.setText(months[month - 1] + " " + year);
+        // update month and year
+        header.setMonthAndYear(months[month - 1], year);
     }
 
     private final int[] setDate = {1, 1, 2024};
