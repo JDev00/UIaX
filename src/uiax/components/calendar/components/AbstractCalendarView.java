@@ -33,6 +33,8 @@ import java.util.Objects;
  */
 
 public abstract class AbstractCalendarView extends WrapperView implements CalendarView {
+    public static final String STYLE_MARK_DAY_TASK_COLOR = "dayMarkerTaskColor";
+
     private final Calendar calendar = GregorianCalendar.getInstance();
 
     private final CalendarCell[] cells = new CalendarCell[38];
@@ -192,80 +194,6 @@ public abstract class AbstractCalendarView extends WrapperView implements Calend
     }
 
     /**
-     * Helper function. Adjusts the font size according to the calendar View dimension.
-     */
-
-    private void updateFontSize(float width, float height) {
-        int fontSize = (int) Math.min(
-                Math.min(0.75f * width * getWidth(), 0.75f * height * getHeight()),
-                Font.DESKTOP_SIZE
-        );
-        if (fontSize != (int) font.getSize()) {
-            font.setSize(fontSize);
-        }
-    }
-
-    /**
-     * Helper function. Updates the day cells.
-     */
-
-    private void updateDayCells(float posY, float[] cellDim) {
-        int inactiveCells = 0;
-        float gap = (0.95f - posY) / 5f;
-        for (int i = 0; i < 31; i++) {
-            float px = 0.15f + cellDim[0] * ((i + offset) % 7);
-            float py = posY + gap * ((i + offset) / 7);
-
-            CalendarCell cell = cells[7 + i];
-            cell.setPosition(px, py);
-            cell.setVisible(i < days);
-
-            if (cell.active) {
-                overlayCell.setPosition(px, py);
-                overlayCell.setVisible(true);
-                overlayCell.update(this);
-            } else {
-                inactiveCells++;
-            }
-        }
-
-        if (inactiveCells == 31) {
-            overlayCell.setVisible(false);
-        }
-    }
-
-    @Override
-    public void update(View container) {
-        super.update(container);
-
-        if (isVisible()) {
-            // highlights the current day
-            if (currentDate[0] > 0) {
-                cells[7 + currentDate[0] - 1].getStyle().setTextColor(currentDayColor);
-            }
-
-            float[] cellDim = {0.7f / 6f, 0.08f};
-
-            updateFontSize(cellDim[0], cellDim[1]);
-
-            overlayCell.setDimension(cellDim[0], cellDim[1]);
-
-            float weekCellPosY = 1f / 3f;
-            for (int i = 0; i < 7; i++) {
-                cells[i].setPosition(0.15f + cellDim[0] * i, weekCellPosY);
-            }
-
-            float dayCellPosY = weekCellPosY + cellDim[0];
-            updateDayCells(dayCellPosY, cellDim);
-
-            for (CalendarCell cell : cells) {
-                cell.setDimension(cellDim[0], cellDim[1]);
-                cell.update(this);
-            }
-        }
-    }
-
-    /**
      * Helper function. Marks the current date cell.
      *
      * @param day the day between [1, 31]
@@ -382,5 +310,96 @@ public abstract class AbstractCalendarView extends WrapperView implements Calend
     public boolean hasTask(int day) {
         validateDay(day);
         return cells[7 + day - 1].hasTask;
+    }
+
+    /**
+     * Helper function. Adjusts the font size according to the calendar View dimension.
+     */
+
+    private void updateFontSize(float width, float height) {
+        int fontSize = (int) Math.min(
+                Math.min(0.75f * width * getWidth(), 0.75f * height * getHeight()),
+                Font.DESKTOP_SIZE
+        );
+        if (fontSize != (int) font.getSize()) {
+            font.setSize(fontSize);
+        }
+    }
+
+    /**
+     * Helper function. Updates the day cells.
+     */
+
+    private void updateDayCells(float posY, float[] cellDim) {
+        int inactiveCells = 0;
+        float gap = (0.95f - posY) / 5f;
+        for (int i = 0; i < 31; i++) {
+            float px = 0.15f + cellDim[0] * ((i + offset) % 7);
+            float py = posY + gap * ((i + offset) / 7);
+
+            CalendarCell cell = cells[7 + i];
+            cell.setPosition(px, py);
+            cell.setVisible(i < days);
+
+            if (cell.active) {
+                overlayCell.setPosition(px, py);
+                overlayCell.setVisible(true);
+                overlayCell.update(this);
+            } else {
+                inactiveCells++;
+            }
+        }
+
+        if (inactiveCells == 31) {
+            overlayCell.setVisible(false);
+        }
+    }
+
+    /**
+     * Helper function. Colors the marker task of each day.
+     */
+
+    private void colorDayMarkerTask() {
+        try {
+            Color dayMarkerTaskColor = getStyle().getAttribute(STYLE_MARK_DAY_TASK_COLOR);
+            for (int i = 7; i < cells.length; i++) {
+                cells[i].getTaskStyle().setBackgroundColor(dayMarkerTaskColor);
+            }
+        } catch (Exception ignored) {
+            // ignored
+        }
+    }
+
+    @Override
+    public void update(View container) {
+        super.update(container);
+
+        if (isVisible()) {
+            colorDayMarkerTask();
+
+            // highlights the current day
+            if (currentDate[0] > 0) {
+                cells[7 + currentDate[0] - 1].getStyle().setTextColor(currentDayColor);
+            }
+
+            float[] cellDim = {0.7f / 6f, 0.08f};
+
+            updateFontSize(cellDim[0], cellDim[1]);
+
+            overlayCell.setDimension(cellDim[0], cellDim[1]);
+
+            float weekCellPosY = 1f / 3f;
+            for (int i = 0; i < 7; i++) {
+                cells[i].setPosition(0.15f + cellDim[0] * i, weekCellPosY);
+            }
+
+            float dayCellPosY = weekCellPosY + cellDim[0];
+            updateDayCells(dayCellPosY, cellDim);
+
+            for (CalendarCell cell : cells) {
+                cell.setDimension(cellDim[0], cellDim[1]);
+                cell.update(this);
+            }
+        }
     }
 }

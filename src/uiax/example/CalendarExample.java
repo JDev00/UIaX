@@ -1,11 +1,13 @@
 package uiax.example;
 
 import uia.application.ui.component.WrapperView;
+import uia.core.rendering.color.ColorCollection;
 import uia.application.ui.group.ComponentGroup;
 import uia.application.ui.component.Component;
 import uia.core.context.Context;
 import uia.core.ui.ViewGroup;
 
+import uiax.components.calendar.components.AbstractCalendarView;
 import uiax.components.calendar.SingleDaySelectionCalendar;
 import uiax.components.calendar.CalendarFactory;
 import uiax.components.calendar.CalendarView;
@@ -25,6 +27,10 @@ public class CalendarExample extends WrapperView {
         CalendarView calendar = CalendarFactory.create(
                 SingleDaySelectionCalendar.class,
                 new Component("calendar", 0.5f, 0.5f, 0.5f, 0.5f)
+        );
+        calendar.getStyle().setAttribute(
+                AbstractCalendarView.STYLE_MARK_DAY_TASK_COLOR,
+                ColorCollection.GREEN_YELLOW
         );
         calendar.markDayWithTask(1, true);
         calendar.markDayWithTask(21, true);
