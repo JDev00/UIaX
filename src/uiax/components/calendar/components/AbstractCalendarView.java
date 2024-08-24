@@ -121,7 +121,9 @@ public abstract class AbstractCalendarView extends WrapperView implements Calend
      */
 
     private void validateDay(int day) {
-        int daysOfTheMonth = setDate[1];
+        int month = setDate[1];
+        int year = setDate[2];
+        int daysOfTheMonth = CalendarUtility.getDaysOfTheMonth(month, year);
         if (day < 1 || day > daysOfTheMonth) {
             throw new IllegalArgumentException("the day must be between [1, " + daysOfTheMonth + "]");
         }
@@ -136,10 +138,7 @@ public abstract class AbstractCalendarView extends WrapperView implements Calend
      */
 
     protected void markDayAsSelected(int day, boolean selected) {
-        if (day < 1 || day > 31) {
-            throw new IndexOutOfBoundsException("the day must be between [1, 31]. You gave " + day);
-        }
-
+        validateDay(day);
         cells[7 + day - 1].selected = selected;
     }
 
@@ -149,10 +148,7 @@ public abstract class AbstractCalendarView extends WrapperView implements Calend
      */
 
     protected boolean isDayMarkedAsSelected(int day) {
-        if (day < 1 || day > 31) {
-            throw new IndexOutOfBoundsException("the day must be between [1, 31]. You gave " + day);
-        }
-
+        validateDay(day);
         return cells[7 + day - 1].selected;
     }
 

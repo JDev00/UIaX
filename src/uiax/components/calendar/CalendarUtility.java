@@ -58,6 +58,34 @@ public final class CalendarUtility {
     }
 
     /**
+     * @param month the month between [1, 12]
+     * @param year  the year
+     * @return the days of the given month or -1 if the month is not valid
+     */
+
+    public static int getDaysOfTheMonth(int month, int year) {
+        switch (month) {
+            case 1:  // january
+            case 3:  // march
+            case 5:  // may
+            case 7:  // july
+            case 8:  // august
+            case 10: // september
+            case 12: // december
+                return 31;
+            case 2:
+                return year % 4 == 0 ? 29 : 28;
+            case 4:
+            case 6:
+            case 9:
+            case 11:
+                return 30;
+            default:
+                return -1;
+        }
+    }
+
+    /**
      * Checks if the given string is equal to the given value.
      *
      * @param in    a not null String to compare to
