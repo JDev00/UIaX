@@ -19,6 +19,9 @@ import uia.core.ui.ViewGroup;
 import uia.core.ui.ViewText;
 import uia.core.ui.View;
 
+import uiax.components.calendar.callbacks.OnDateChange;
+import uiax.components.calendar.callbacks.OnDaySelect;
+import uiax.components.calendar.callbacks.OnDateSet;
 import uiax.colors.DarculaColorCollection;
 
 import java.util.function.Consumer;

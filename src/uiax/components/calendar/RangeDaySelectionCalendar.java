@@ -6,6 +6,9 @@ import uia.core.ui.style.StyleFunction;
 import uia.core.ui.style.Style;
 import uia.core.ui.View;
 
+import uiax.components.calendar.callbacks.OnDaySelect;
+import uiax.components.calendar.callbacks.onSelectionClear;
+
 /**
  * Gregorian calendar with day range selection.
  */

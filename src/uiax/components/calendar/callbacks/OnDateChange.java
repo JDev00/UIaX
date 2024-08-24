@@ -1,4 +1,4 @@
-package uiax.components.calendar;
+package uiax.components.calendar.callbacks;
 
 import uia.core.basement.Callback;
 
