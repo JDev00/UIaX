@@ -42,7 +42,6 @@ public abstract class AbstractCalendarView extends WrapperView implements Calend
     private final String[] months;
     private final Font font;
 
-
     private int days;
     private int offset;
     private final int[] currentDate = {1, 1, 2024};
@@ -109,8 +108,8 @@ public abstract class AbstractCalendarView extends WrapperView implements Calend
         ViewGroup.insert(group, header, overlayCell);
 
         // sets the current date
-        int[] currentDate = CalendarUtility.getDate();
-        setDate(currentDate[0], currentDate[1], currentDate[2]);
+        int[] nowDate = CalendarUtility.getDate();
+        setDate(nowDate[0], nowDate[1], nowDate[2]);
     }
 
     /**
