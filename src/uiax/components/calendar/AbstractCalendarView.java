@@ -19,8 +19,8 @@ import uia.core.ui.ViewGroup;
 import uia.core.ui.ViewText;
 import uia.core.ui.View;
 
-import uiax.components.calendar.callbacks.OnDateChange;
-import uiax.components.calendar.callbacks.OnDaySelect;
+import uiax.components.calendar.callbacks.OnDateChanged;
+import uiax.components.calendar.callbacks.OnDaySelected;
 import uiax.components.calendar.callbacks.OnDateSet;
 import uiax.colors.DarculaColorCollection;
 
@@ -95,7 +95,7 @@ public abstract class AbstractCalendarView extends WrapperView implements Calend
             cell.getStyle().setTextColor(ColorCollection.WHITE);
             cell.registerCallback((OnClick) touches -> {
                 int day = Integer.parseInt(cell.getText());
-                notifyCallbacks(OnDaySelect.class, day);
+                notifyCallbacks(OnDaySelected.class, day);
             });
             cells[i + 7] = cell;
         }
@@ -407,7 +407,7 @@ public abstract class AbstractCalendarView extends WrapperView implements Calend
 
         // notifies clients
         int[] date = getDate();
-        notifyCallbacks(OnDateChange.class, date);
+        notifyCallbacks(OnDateChanged.class, date);
     }
 
     @Override

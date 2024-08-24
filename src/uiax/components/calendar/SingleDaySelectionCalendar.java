@@ -7,8 +7,8 @@ import uia.core.ui.style.StyleFunction;
 import uia.core.ui.style.Style;
 import uia.core.ui.View;
 
-import uiax.components.calendar.callbacks.OnDaySelect;
-import uiax.components.calendar.callbacks.onSelectionClear;
+import uiax.components.calendar.callbacks.OnSelectionCleared;
+import uiax.components.calendar.callbacks.OnDaySelected;
 
 /**
  * Gregorian calendar with single day selection.
@@ -26,7 +26,7 @@ public class SingleDaySelectionCalendar extends AbstractCalendarView {
         super(view, weekdays, months);
 
         // updates day selection
-        registerCallback((OnDaySelect) day -> {
+        registerCallback((OnDaySelected) day -> {
             boolean isDayAlreadySelected = isDayMarkedAsSelected(day);
             deselectAllDays();
             if (!isDayAlreadySelected) {
@@ -79,7 +79,7 @@ public class SingleDaySelectionCalendar extends AbstractCalendarView {
             throw new IllegalArgumentException("the day must be between [1, 31]. " + day + " provided");
         }
 
-        notifyCallbacks(OnDaySelect.class, day);
+        notifyCallbacks(OnDaySelected.class, day);
     }
 
     @Override
@@ -89,7 +89,7 @@ public class SingleDaySelectionCalendar extends AbstractCalendarView {
         }
 
         if (isDayMarkedAsSelected(day)) {
-            notifyCallbacks(OnDaySelect.class, day);
+            notifyCallbacks(OnDaySelected.class, day);
         }
     }
 
@@ -97,6 +97,6 @@ public class SingleDaySelectionCalendar extends AbstractCalendarView {
     public void clearDaySelection() {
         deselectAllDays();
         updateDayStyle();
-        notifyCallbacks(onSelectionClear.class, this);
+        notifyCallbacks(OnSelectionCleared.class, this);
     }
 }

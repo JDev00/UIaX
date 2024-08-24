@@ -6,8 +6,8 @@ import uia.core.ui.style.StyleFunction;
 import uia.core.ui.style.Style;
 import uia.core.ui.View;
 
-import uiax.components.calendar.callbacks.OnDaySelect;
-import uiax.components.calendar.callbacks.onSelectionClear;
+import uiax.components.calendar.callbacks.OnDaySelected;
+import uiax.components.calendar.callbacks.OnSelectionCleared;
 
 /**
  * Gregorian calendar with day range selection.
@@ -27,7 +27,7 @@ public class RangeDaySelectionCalendar extends AbstractCalendarView {
         super(view, weekdays, months);
 
         // updates day selection
-        registerCallback((OnDaySelect) day -> {
+        registerCallback((OnDaySelected) day -> {
             dayRangeSelection(day);
             updateDayStyle();
         });
@@ -38,7 +38,7 @@ public class RangeDaySelectionCalendar extends AbstractCalendarView {
         if (day < 1 || day > 31) {
             throw new IllegalArgumentException("the day must be between [1, 31]. " + day + " provided");
         }
-        notifyCallbacks(OnDaySelect.class, day);
+        notifyCallbacks(OnDaySelected.class, day);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class RangeDaySelectionCalendar extends AbstractCalendarView {
     public void clearDaySelection() {
         deselectsAllDays();
         updateDayStyle();
-        notifyCallbacks(onSelectionClear.class, this);
+        notifyCallbacks(OnSelectionCleared.class, this);
     }
 
     /**
