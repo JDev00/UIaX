@@ -6,6 +6,8 @@ Version 1.1.0
 
 * Marks the calendar day that has a task
 
+** requires UIa >= 2.2.0
+
 ################
 Version 1.0.1
 ################
