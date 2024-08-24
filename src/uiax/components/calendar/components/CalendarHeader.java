@@ -25,7 +25,7 @@ import java.util.function.Consumer;
 
 public class CalendarHeader extends WrapperView {
 
-    public CalendarHeader(View view, Font font, Consumer<Boolean> callback) {
+    public CalendarHeader(View view, Font font, Consumer<Boolean> onNextMonth) {
         super(new ComponentGroup(view));
         // group style
         Style groupStyle = getStyle();
@@ -50,7 +50,7 @@ public class CalendarHeader extends WrapperView {
         // calendar header left arrow
         View leftArrow = new Component(id + "_left_arrow", 0.75f, 0.5f, 0.05f, 0.4f)
                 .setExpanseLimit(1.2f, 1.2f);
-        leftArrow.registerCallback((OnClick) touches -> callback.accept(false));
+        leftArrow.registerCallback((OnClick) touches -> onNextMonth.accept(false));
         leftArrow.setColliderPolicy(Collidable.ColliderPolicy.AABB);
         leftArrow.getStyle()
                 .setGeometry(GeometryCollection::arrow, false)
@@ -60,7 +60,7 @@ public class CalendarHeader extends WrapperView {
         // calendar header right arrow
         View rightArrow = new Component(id + "_right_arrow", 0.965f, 0.5f, 0.05f, 0.4f)
                 .setExpanseLimit(1.2f, 1.2f);
-        rightArrow.registerCallback((OnClick) touches -> callback.accept(true));
+        rightArrow.registerCallback((OnClick) touches -> onNextMonth.accept(true));
         rightArrow.setColliderPolicy(Collidable.ColliderPolicy.AABB);
         rightArrow.getStyle()
                 .setTextColor(groupStyle.getBackgroundColor())
