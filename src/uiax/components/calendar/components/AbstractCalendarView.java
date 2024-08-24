@@ -45,6 +45,7 @@ public abstract class AbstractCalendarView extends WrapperView implements Calend
     private int days;
     private int offset;
     private final int[] currentDate = {1, 1, 2024};
+    private final int[] setDate = {1, 1, 2024};
 
     protected AbstractCalendarView(View view, String[] weekdays, String[] months) {
         super(new ComponentGroup(view));
@@ -110,6 +111,20 @@ public abstract class AbstractCalendarView extends WrapperView implements Calend
         // sets the current date
         int[] nowDate = CalendarUtility.getDate();
         setDate(nowDate[0], nowDate[1], nowDate[2]);
+    }
+
+    /**
+     * Helper function. Throws an error if the day is out of range.
+     *
+     * @param day the day to check
+     * @throws IndexOutOfBoundsException if {@code day < 1 || day > days of the month}
+     */
+
+    private void validateDay(int day) {
+        int daysOfTheMonth = setDate[1];
+        if (day < 1 || day > daysOfTheMonth) {
+            throw new IllegalArgumentException("the day must be between [1, " + daysOfTheMonth + "]");
+        }
     }
 
     /**
@@ -306,13 +321,9 @@ public abstract class AbstractCalendarView extends WrapperView implements Calend
         header.setMonthAndYear(months[month - 1], year);
     }
 
-    private final int[] setDate = {1, 1, 2024};
-
     @Override
     public void setDate(int day, int month, int year) {
-        if (day < 1 || day > 31) {
-            throw new IllegalArgumentException("the day must be between [1, 31]");
-        }
+        validateDay(day);
         if (month < 1 || month > 12) {
             throw new IllegalArgumentException("the month must be between [1, 12]");
         }
@@ -367,11 +378,13 @@ public abstract class AbstractCalendarView extends WrapperView implements Calend
 
     @Override
     public void markDayWithTask(int day, boolean hasTask) {
-
+        validateDay(day);
+        cells[7 + day - 1].hasTask = hasTask;
     }
 
     @Override
     public boolean hasTask(int day) {
-        return false;
+        validateDay(day);
+        return cells[7 + day - 1].hasTask;
     }
 }
