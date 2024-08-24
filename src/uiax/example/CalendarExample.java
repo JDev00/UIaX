@@ -26,6 +26,8 @@ public class CalendarExample extends WrapperView {
                 SingleDaySelectionCalendar.class,
                 new Component("calendar", 0.5f, 0.5f, 0.5f, 0.5f)
         );
+        calendar.markDayWithTask(1, true);
+        calendar.markDayWithTask(21, true);
 
         // displays the calendar
         ViewGroup group = getView();
