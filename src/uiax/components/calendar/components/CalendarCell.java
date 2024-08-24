@@ -46,6 +46,7 @@ public class CalendarCell extends WrapperView {
 
         // task highlight
         viewTask = new Component(id + "_task", 0.5f, 0.9f, 0.275f, 0.1f);
+        viewTask.setInputConsumer(InputConsumer.SCREEN_TOUCH, false);
         viewTask.getStyle()
                 .setBackgroundColor(ColorCollection.WHITE)
                 .setMaxHeight(2);
