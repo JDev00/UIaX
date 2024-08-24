@@ -1,4 +1,4 @@
-package uiax.components;
+package uiax.colors;
 
 import uia.core.rendering.color.Color;
 

@@ -19,7 +19,7 @@ import uia.core.ui.ViewGroup;
 import uia.core.ui.ViewText;
 import uia.core.ui.View;
 
-import uiax.components.DarculaColorCollection;
+import uiax.colors.DarculaColorCollection;
 
 import java.util.function.Consumer;
 import java.util.GregorianCalendar;
