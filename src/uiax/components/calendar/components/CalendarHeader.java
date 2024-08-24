@@ -1,21 +1,21 @@
 package uiax.components.calendar.components;
 
-import uia.application.ui.component.Component;
-import uia.application.ui.component.WrapperView;
 import uia.application.ui.component.text.ComponentText;
-import uia.application.ui.group.ComponentGroup;
-import uia.core.basement.Collidable;
-import uia.core.rendering.color.ColorCollection;
-import uia.core.rendering.font.Font;
 import uia.core.rendering.geometry.GeometryCollection;
-import uia.core.ui.View;
+import uia.core.ui.style.TextHorizontalAlignment;
+import uia.core.rendering.color.ColorCollection;
+import uia.application.ui.component.WrapperView;
+import uia.core.ui.style.TextVerticalAlignment;
+import uia.application.ui.group.ComponentGroup;
+import uia.application.ui.component.Component;
+import uia.core.ui.callbacks.OnClick;
+import uia.core.basement.Collidable;
+import uia.core.rendering.font.Font;
+import uia.utility.MathUtility;
+import uia.core.ui.style.Style;
 import uia.core.ui.ViewGroup;
 import uia.core.ui.ViewText;
-import uia.core.ui.callbacks.OnClick;
-import uia.core.ui.style.Style;
-import uia.core.ui.style.TextHorizontalAlignment;
-import uia.core.ui.style.TextVerticalAlignment;
-import uia.utility.MathUtility;
+import uia.core.ui.View;
 
 import java.util.function.Consumer;
 

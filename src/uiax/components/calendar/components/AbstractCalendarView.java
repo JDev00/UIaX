@@ -11,7 +11,6 @@ import uia.core.ui.callbacks.OnClick;
 import uia.core.rendering.font.Font;
 import uia.core.ui.style.Style;
 import uia.core.ui.ViewGroup;
-import uia.core.ui.ViewText;
 import uia.core.ui.View;
 
 import uiax.components.calendar.callbacks.OnDateChanged;
