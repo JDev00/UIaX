@@ -33,7 +33,7 @@ import java.util.Objects;
  */
 
 public abstract class AbstractCalendarView extends WrapperView implements CalendarView {
-    public static final String STYLE_MARK_DAY_TASK_COLOR = "dayMarkerTaskColor";
+    public static final String STYLE_DAY_TASK_COLOR_MARKER = "dayMarkerTaskColor";
 
     private final Calendar calendar = GregorianCalendar.getInstance();
 
@@ -361,7 +361,7 @@ public abstract class AbstractCalendarView extends WrapperView implements Calend
 
     private void colorDayMarkerTask() {
         try {
-            Color dayMarkerTaskColor = getStyle().getAttribute(STYLE_MARK_DAY_TASK_COLOR);
+            Color dayMarkerTaskColor = getStyle().getAttribute(STYLE_DAY_TASK_COLOR_MARKER);
             for (int i = 7; i < cells.length; i++) {
                 cells[i].getTaskStyle().setBackgroundColor(dayMarkerTaskColor);
             }

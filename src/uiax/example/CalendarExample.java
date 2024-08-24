@@ -29,7 +29,7 @@ public class CalendarExample extends WrapperView {
                 new Component("calendar", 0.5f, 0.5f, 0.5f, 0.5f)
         );
         calendar.getStyle().setAttribute(
-                AbstractCalendarView.STYLE_MARK_DAY_TASK_COLOR,
+                AbstractCalendarView.STYLE_DAY_TASK_COLOR_MARKER,
                 ColorCollection.GREEN_YELLOW
         );
         calendar.markDayWithTask(1, true);
