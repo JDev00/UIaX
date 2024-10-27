@@ -8,7 +8,6 @@ import uia.core.context.Context;
 import uia.core.ui.ViewGroup;
 
 import uiax.components.calendar.components.AbstractCalendarView;
-import uiax.components.calendar.SingleDaySelectionCalendar;
 import uiax.components.calendar.CalendarFactory;
 import uiax.components.calendar.CalendarView;
 
@@ -25,8 +24,8 @@ public class CalendarExample extends WrapperView {
 
         // creates the calendar
         CalendarView calendar = CalendarFactory.create(
-                SingleDaySelectionCalendar.class,
-                new Component("calendar", 0.5f, 0.5f, 0.5f, 0.5f)
+                new Component("calendar", 0.5f, 0.5f, 0.5f, 0.5f),
+                true
         );
         calendar.getStyle().setAttribute(
                 AbstractCalendarView.STYLE_DAY_TASK_COLOR_MARKER,

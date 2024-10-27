@@ -18,20 +18,20 @@ public class CalendarFactory {
     /**
      * Creates a new {@link CalendarView} instance with {@link CalendarView#WEEK} and {@link CalendarView#MONTHS}.
      *
-     * @param calendarClass the calendar to be created
-     * @param view          the backbone view of the calendar
+     * @param view               the backbone view of the calendar
+     * @param singleDaySelection true to create a calendar with a single selectable day; false to create
+     *                           a calendar with multiple selectable days
      * @return a new {@link CalendarView} instance
-     * @throws NullPointerException if {@code calendarClass == null || view == null}
+     * @throws NullPointerException if {@code view == null}
      */
 
-    public static CalendarView create(Class<? extends CalendarView> calendarClass, View view) {
-        Objects.requireNonNull(calendarClass);
+    public static CalendarView create(View view, boolean singleDaySelection) {
         Objects.requireNonNull(view);
 
-        CalendarView result = null;
-        if (calendarClass.equals(SingleDaySelectionCalendar.class)) {
+        CalendarView result;
+        if (singleDaySelection) {
             result = new SingleDaySelectionCalendar(view, WEEK, MONTHS);
-        } else if (calendarClass.equals(RangeDaySelectionCalendar.class)) {
+        } else {
             result = new RangeDaySelectionCalendar(view, WEEK, MONTHS);
         }
 
