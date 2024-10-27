@@ -25,7 +25,7 @@ public class VerticalPositioner implements ViewPositioner {
             }
 
             sum[0] += h;
-            view.setPosition(0.5f, sum[0]);
+            view.getStyle().setPosition(0.5f, sum[0]);
             sum[0] += h;
         }
     }

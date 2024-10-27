@@ -25,7 +25,7 @@ public class HorizontalPositioner implements ViewPositioner {
             }
 
             sum[0] += width;
-            view.setPosition(sum[0], 0.5f);
+            view.getStyle().setPosition(sum[0], 0.5f);
             sum[0] += width;
         }
     }

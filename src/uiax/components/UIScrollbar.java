@@ -187,10 +187,14 @@ public final class UIScrollbar extends WrapperView {
     private void updateInternalBarPosition() {
         if (vertical) {
             float off = 0.5f * internalBar.getHeight() / getHeight();
-            internalBar.setPosition(0.5f, MathUtility.map(val / max, 0f, 1f, off, 1f - off));
+            internalBar.getStyle().setPosition(
+                    0.5f,
+                    MathUtility.map(val / max, 0f, 1f, off, 1f - off));
         } else {
             float off = 0.5f * internalBar.getWidth() / getWidth();
-            internalBar.setPosition(MathUtility.map(val / max, 0f, 1f, off, 1f - off), 0.5f);
+            internalBar.getStyle().setPosition(
+                    MathUtility.map(val / max, 0f, 1f, off, 1f - off),
+                    0.5f);
         }
     }
 
@@ -204,9 +208,9 @@ public final class UIScrollbar extends WrapperView {
     public void setInternalBarSize(float size) {
         size = MathUtility.constrain(size, 0, 1f);
         if (vertical) {
-            internalBar.setDimension(0.9f, size);
+            internalBar.getStyle().setDimension(0.9f, size);
         } else {
-            internalBar.setDimension(size, 0.9f);
+            internalBar.getStyle().setDimension(size, 0.9f);
         }
         updateInternalBar = true;
     }

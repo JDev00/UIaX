@@ -338,11 +338,11 @@ public abstract class AbstractCalendarView extends WrapperView implements Calend
             float py = posY + gap * ((i + offset) / 7);
 
             CalendarCell cell = cells[7 + i];
-            cell.setPosition(px, py);
+            cell.getStyle().setPosition(px, py);
             cell.setVisible(i < days);
 
             if (cell.active) {
-                overlayCell.setPosition(px, py);
+                overlayCell.getStyle().setPosition(px, py);
                 overlayCell.setVisible(true);
                 overlayCell.update(this);
             } else {
@@ -386,18 +386,18 @@ public abstract class AbstractCalendarView extends WrapperView implements Calend
 
             updateFontSize(cellDim[0], cellDim[1]);
 
-            overlayCell.setDimension(cellDim[0], cellDim[1]);
+            overlayCell.getStyle().setDimension(cellDim[0], cellDim[1]);
 
             float weekCellPosY = 1f / 3f;
             for (int i = 0; i < 7; i++) {
-                cells[i].setPosition(0.15f + cellDim[0] * i, weekCellPosY);
+                cells[i].getStyle().setPosition(0.15f + cellDim[0] * i, weekCellPosY);
             }
 
             float dayCellPosY = weekCellPosY + cellDim[0];
             updateDayCells(dayCellPosY, cellDim);
 
             for (CalendarCell cell : cells) {
-                cell.setDimension(cellDim[0], cellDim[1]);
+                cell.getStyle().setDimension(cellDim[0], cellDim[1]);
                 cell.update(this);
             }
         }

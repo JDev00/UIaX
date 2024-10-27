@@ -201,11 +201,11 @@ public final class UIListView extends WrapperView implements ViewGroup {
             float normalizedVerticalBarWidth = SCROLLBAR_THICKNESS / bounds[2];
 
             float horizontalBarWidth = verticalBarVisible ? 1f - normalizedVerticalBarWidth : 1f;
-            horizontalBar.setDimension(horizontalBarWidth, 0f);
+            horizontalBar.getStyle().setDimension(horizontalBarWidth, 0f);
 
             float horizontalBarPositionX = verticalBarVisible ? 0.5f - normalizedVerticalBarWidth / 2 : 0.5f;
             float normalizedScrollbarHeight = SCROLLBAR_THICKNESS / bounds[3];
-            horizontalBar.setPosition(
+            horizontalBar.getStyle().setPosition(
                     horizontalBarPositionX,
                     1f - 0.5f * normalizedScrollbarHeight
             );
@@ -225,7 +225,7 @@ public final class UIListView extends WrapperView implements ViewGroup {
         verticalBar.setVisible(barHeight < 1f);
 
         if (verticalBar.isVisible()) {
-            verticalBar.setPosition(1f - 0.5f * SCROLLBAR_THICKNESS / bounds[2], 0.5f);
+            verticalBar.getStyle().setPosition(1f - 0.5f * SCROLLBAR_THICKNESS / bounds[2], 0.5f);
             verticalBar.setMaxValue(height);
         }
     }
@@ -250,7 +250,7 @@ public final class UIListView extends WrapperView implements ViewGroup {
             updateHorizontalScrollbar(bounds, boundsContent);
 
             // adjusts the container position according to the scroll value
-            viewsContainer.setPosition(
+            viewsContainer.getStyle().setPosition(
                     0.5f - horizontalBar.getValue() / bounds[2],
                     0.5f - verticalBar.getValue() / bounds[3]
             );

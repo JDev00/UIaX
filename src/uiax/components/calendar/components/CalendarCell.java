@@ -82,14 +82,15 @@ public class CalendarCell extends WrapperView {
     }
 
     @Override
-    public Style getStyle() {
-        return viewText.getStyle();
-    }
-
-    @Override
     public void update(View parent) {
         super.update(parent);
+
         viewTask.setVisible(hasTask);
+
+        Style style = getStyle();
+        viewText.getStyle()
+                .setTextColor(style.getTextColor())
+                .setFont(style.getFont());
     }
 
     /**
