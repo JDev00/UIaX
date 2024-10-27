@@ -25,7 +25,7 @@ public class ScrollableList extends WrapperView {
 
         // creates the list of items
         UIListView listView = new UIListView(
-                new Component("LIST", 0.5f, 0.5f, 0.8f, 0.8f)
+                new Component("listview", 0.5f, 0.5f, 0.8f, 0.8f)
         );
         listView.getStyle().setBackgroundColor(ColorCollection.LIGHT_GRAY);
         View[] items = createListItems();
@@ -39,10 +39,10 @@ public class ScrollableList extends WrapperView {
      */
 
     private static View[] createListItems() {
-        View[] result = new View[500];
+        View[] result = new View[2_000];
         for (int i = 0; i < result.length; i++) {
             ViewText item = new ComponentText(
-                    new Component("ITEM_" + i, 0, 0, 1f, 0.1f)
+                    new Component("item_" + i, 0, 0, 1f, 0.1f)
             );
             item.getStyle().setBackgroundColor(ColorCollection.LIGHT_CORAL);
             item.setText("Item number " + i);
