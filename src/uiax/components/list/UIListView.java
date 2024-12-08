@@ -39,7 +39,7 @@ public final class UIListView extends WrapperView implements ViewGroup {
         viewPositioner = ViewPositionerFactory.create(this, 1.01f, true);
 
         verticalBar = new UIScrollbar(
-                new Component("VERTICAL_SCROLLBAR_" + getID(), 0f, 0f, 0f, 0.995f),
+                new Component("vertical_scrollbar_" + getID(), 0f, 0f, 0f, 0.995f),
                 true
         );
         verticalBar.setInputConsumer(InputConsumer.SCREEN_TOUCH, true);
@@ -50,7 +50,7 @@ public final class UIListView extends WrapperView implements ViewGroup {
                 .setMinWidth(SCROLLBAR_THICKNESS);
 
         horizontalBar = new UIScrollbar(
-                new Component("HORIZONTAL_SCROLLBAR_" + getID(), 0f, 0f, 0f, 0f),
+                new Component("horizontal_scrollbar_" + getID(), 0f, 0f, 0f, 0f),
                 false
         );
         horizontalBar.setVisible(false);
@@ -60,11 +60,10 @@ public final class UIListView extends WrapperView implements ViewGroup {
                 .setMinHeight(SCROLLBAR_THICKNESS);
 
         viewsContainer = new ComponentGroup(
-                new Component("SKELETON" + getID(), 0.5f, 0.5f, 1f, 1f)
+                new Component("skeleton_" + getID(), 0.5f, 0.5f, 1f, 1f)
         );
         viewsContainer.setInputConsumer(InputConsumer.SCREEN_TOUCH, false);
         viewsContainer.getStyle().setBackgroundColor(ColorCollection.TRANSPARENT);
-        viewsContainer.setClip(false);
 
         containerGroup = getView();
         ViewGroup.insert(containerGroup, viewsContainer, horizontalBar, verticalBar);
@@ -73,6 +72,7 @@ public final class UIListView extends WrapperView implements ViewGroup {
     @Override
     public void setClip(boolean clipRegion) {
         containerGroup.setClip(clipRegion);
+        viewsContainer.setClip(clipRegion);
     }
 
     @Override
@@ -236,24 +236,25 @@ public final class UIListView extends WrapperView implements ViewGroup {
         verticalBar.setInternalBarSize(barHeight);
 
         super.update(parent);
-        // updates the component a second time.
-        // It needs to be studied further.
-        updatePositioner();
-        super.update(parent);
 
         if (isVisible()) {
             float[] bounds = getBounds();
             float[] boundsContent = viewsContainer.boundsContent();
 
-            // updates scrollbars
+            // 1. updates the positioner and scrollbars
+            updatePositioner();
             updateVerticalScrollbar(bounds, boundsContent);
             updateHorizontalScrollbar(bounds, boundsContent);
 
-            // adjusts the container position according to the scroll value
-            viewsContainer.getStyle().setPosition(
-                    0.5f - horizontalBar.getValue() / bounds[2],
-                    0.5f - verticalBar.getValue() / bounds[3]
-            );
+            // 2. updates views position
+            float offsetX = -horizontalBar.getValue() / bounds[2];
+            float offsetY = -verticalBar.getValue() / bounds[3];
+            for (View view : viewsContainer) {
+                view.getStyle().translate(offsetX, offsetY);
+            }
+
+            // 3. updates parent component
+            super.update(parent);
         }
     }
 }
