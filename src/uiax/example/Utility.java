@@ -1,8 +1,8 @@
 package uiax.example;
 
-import uia.core.context.Context;
+import adaptor.swing.ContextSwing;
 
-import api.swing.ContextSwing;
+import uia.core.context.Context;
 
 import java.awt.*;
 
