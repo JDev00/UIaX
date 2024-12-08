@@ -1,4 +1,12 @@
-UIaX current version is 1.1.0
+UIaX current version is 1.2.0
+
+################
+Version 1.2.0
+################
+
+Updates UIa dependency
+
+** requires UIa >= 2.4.0
 
 ################
 Version 1.1.0
