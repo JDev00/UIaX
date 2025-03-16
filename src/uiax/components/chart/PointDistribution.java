@@ -1,4 +1,4 @@
-package uiax.components.math;
+package uiax.components.chart;
 
 import java.util.ArrayList;
 import java.util.Objects;

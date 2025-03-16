@@ -1,4 +1,4 @@
-package uiax.components.math;
+package uiax.components.chart;
 
 import uia.application.ui.component.utility.ComponentUtility;
 import uia.core.rendering.geometry.GeometryCollection;

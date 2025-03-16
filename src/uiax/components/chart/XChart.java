@@ -1,4 +1,4 @@
-package uiax.components.math;
+package uiax.components.chart;
 
 import uia.application.ui.component.utility.ComponentUtility;
 import uia.core.rendering.geometry.GeometryCollection;
@@ -31,7 +31,7 @@ import java.util.List;
  * 2) it is possible to customise the graphical appearance of a distribution using the dedicated methods.
  */
 
-public class UIGraphic extends WrapperView {
+public class XChart extends WrapperView {
     private final List<DrawableDistribution> drawableDistributions;
 
     private Color axisColor;
@@ -44,7 +44,7 @@ public class UIGraphic extends WrapperView {
     private float xMin;
     private float yMin;
 
-    public UIGraphic(View view) {
+    public XChart(View view) {
         super(view);
 
         drawableDistributions = new ArrayList<>();
