@@ -3,12 +3,12 @@ package uiax.components.calendar;
 import uia.core.ui.View;
 
 /**
- * CalendarView ADT.
+ * XCalendarView ADT.
  * <br>
- * CalendarView is responsible for drawing a calendar.
+ * It defines the calendar widget functionalities.
  */
 
-public interface CalendarView extends View {
+public interface XCalendarView extends View {
     String[] WEEK = {
             "M", "T", "W", "T", "F", "S", "S"
     };

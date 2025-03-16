@@ -16,8 +16,8 @@ import uia.core.ui.View;
 import uiax.components.calendar.callbacks.OnDateChanged;
 import uiax.components.calendar.callbacks.OnDaySelected;
 import uiax.components.calendar.callbacks.OnDateSet;
-import uiax.components.calendar.CalendarUtility;
-import uiax.components.calendar.CalendarView;
+import uiax.components.calendar.XCalendarUtility;
+import uiax.components.calendar.XCalendarView;
 import uiax.colors.DarculaColorCollection;
 
 import java.util.function.Consumer;
@@ -32,13 +32,13 @@ import java.util.Objects;
  * It provides all the calendar basement operations expect day selection.
  */
 
-public abstract class AbstractCalendarView extends WrapperView implements CalendarView {
+public abstract class XAbstractCalendarView extends WrapperView implements XCalendarView {
     public static final String STYLE_DAY_TASK_COLOR_MARKER = "dayMarkerTaskColor";
 
     private final Calendar calendar = GregorianCalendar.getInstance();
 
-    private final CalendarCell[] cells = new CalendarCell[38];
-    private final CalendarHeader header;
+    private final XCalendarCell[] cells = new XCalendarCell[38];
+    private final XCalendarHeader header;
     private final View overlayCell;
     private Color currentDayColor = ColorCollection.PINK;
     private final String[] months;
@@ -49,7 +49,7 @@ public abstract class AbstractCalendarView extends WrapperView implements Calend
     private final int[] currentDate = {1, 1, 2024};
     private final int[] setDate = {1, 1, 2024};
 
-    protected AbstractCalendarView(View view, String[] weekdays, String[] months) {
+    protected XAbstractCalendarView(View view, String[] weekdays, String[] months) {
         super(new ComponentGroup(view));
         getStyle().setBackgroundColor(DarculaColorCollection.DARK_GRAY);
 
@@ -70,7 +70,7 @@ public abstract class AbstractCalendarView extends WrapperView implements Calend
             }
             changeDate(month, year);
         };
-        header = new CalendarHeader(
+        header = new XCalendarHeader(
                 new Component("calendar_header_" + getID(), 0.5f, 0.15f, 0.75f, 0.2f),
                 font, shiftDate
         );
@@ -86,12 +86,12 @@ public abstract class AbstractCalendarView extends WrapperView implements Calend
                 );
 
         for (int i = 0; i < 7; i++) {
-            cells[i] = CalendarCell.createWeekDay(weekdays[i]);
+            cells[i] = XCalendarCell.createWeekDay(weekdays[i]);
             cells[i].getStyle().setTextColor(ColorCollection.SILVER);
         }
 
         for (int i = 0; i < 31; i++) {
-            CalendarCell cell = CalendarCell.createDay(String.valueOf(i + 1));
+            XCalendarCell cell = XCalendarCell.createDay(String.valueOf(i + 1));
             cell.getStyle().setTextColor(ColorCollection.WHITE);
             cell.registerCallback((OnClick) touches -> {
                 int day = Integer.parseInt(cell.getText());
@@ -100,7 +100,7 @@ public abstract class AbstractCalendarView extends WrapperView implements Calend
             cells[i + 7] = cell;
         }
 
-        for (CalendarCell cell : cells) {
+        for (XCalendarCell cell : cells) {
             cell.getStyle()
                     .setBackgroundColor(ColorCollection.TRANSPARENT)
                     .setFont(font);
@@ -111,7 +111,7 @@ public abstract class AbstractCalendarView extends WrapperView implements Calend
         ViewGroup.insert(group, header, overlayCell);
 
         // sets the current date
-        int[] nowDate = CalendarUtility.getDate();
+        int[] nowDate = XCalendarUtility.getDate();
         setDate(nowDate[0], nowDate[1], nowDate[2]);
     }
 
@@ -125,7 +125,7 @@ public abstract class AbstractCalendarView extends WrapperView implements Calend
     private void validateDay(int day) {
         int month = setDate[1];
         int year = setDate[2];
-        int daysOfTheMonth = CalendarUtility.getDaysOfTheMonth(month, year);
+        int daysOfTheMonth = XCalendarUtility.getDaysOfTheMonth(month, year);
         if (day < 1 || day > daysOfTheMonth) {
             throw new IllegalArgumentException("the day must be between [1, " + daysOfTheMonth + "]");
         }
@@ -172,12 +172,12 @@ public abstract class AbstractCalendarView extends WrapperView implements Calend
     }
 
     protected float getDayCelWidth() {
-        CalendarCell cell = cells[7];
+        XCalendarCell cell = cells[7];
         return cell.getWidth();
     }
 
     protected float getDayCelHeight() {
-        CalendarCell cell = cells[7];
+        XCalendarCell cell = cells[7];
         return cell.getHeight();
     }
 
@@ -200,7 +200,7 @@ public abstract class AbstractCalendarView extends WrapperView implements Calend
      */
 
     private void markCurrentDateCell(int day) {
-        for (CalendarCell cell : cells) {
+        for (XCalendarCell cell : cells) {
             cell.current = false;
         }
         // update current cell
@@ -218,7 +218,7 @@ public abstract class AbstractCalendarView extends WrapperView implements Calend
 
         // update data
         days = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
-        offset = CalendarUtility.getDay(calendar.get(Calendar.DAY_OF_WEEK));
+        offset = XCalendarUtility.getDay(calendar.get(Calendar.DAY_OF_WEEK));
 
         // deselects the previous current day
         if (currentDate[0] > 0) {
@@ -337,7 +337,7 @@ public abstract class AbstractCalendarView extends WrapperView implements Calend
             float px = 0.15f + cellDim[0] * ((i + offset) % 7);
             float py = posY + gap * ((i + offset) / 7);
 
-            CalendarCell cell = cells[7 + i];
+            XCalendarCell cell = cells[7 + i];
             cell.getStyle().setPosition(px, py);
             cell.setVisible(i < days);
 
@@ -396,7 +396,7 @@ public abstract class AbstractCalendarView extends WrapperView implements Calend
             float dayCellPosY = weekCellPosY + cellDim[0];
             updateDayCells(dayCellPosY, cellDim);
 
-            for (CalendarCell cell : cells) {
+            for (XCalendarCell cell : cells) {
                 cell.getStyle().setDimension(cellDim[0], cellDim[1]);
                 cell.update(this);
             }

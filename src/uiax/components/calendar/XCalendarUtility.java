@@ -3,12 +3,12 @@ package uiax.components.calendar;
 import java.util.Calendar;
 
 /**
- * CalendarUtility contains a set of functions to easily manipulate dates.
+ * The XCalendarUtility contains functions to manipulate dates.
  */
 
-public final class CalendarUtility {
+public final class XCalendarUtility {
 
-    private CalendarUtility() {
+    private XCalendarUtility() {
     }
 
     /**

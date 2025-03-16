@@ -14,10 +14,10 @@ import uia.core.ui.ViewText;
 import uia.core.ui.View;
 
 /**
- * Subcomponent. CalendarCell is designed to be used as a calendar day or a week day.
+ * Calendar subcomponent. It is designed to be used to render a calendar day or a week day.
  */
 
-public class CalendarCell extends WrapperView {
+public class XCalendarCell extends WrapperView {
     private final ViewText viewText;
     private final View viewTask;
 
@@ -26,7 +26,7 @@ public class CalendarCell extends WrapperView {
     public boolean active = false;
     public boolean hasTask = false;
 
-    public CalendarCell(String id) {
+    public XCalendarCell(String id) {
         super(new ComponentGroup(
                 new Component(id, 0f, 0f, 0f, 0f)
         ));
@@ -97,11 +97,11 @@ public class CalendarCell extends WrapperView {
      * Creates a new CalendarCell suitable for representing a week day.
      *
      * @param weekDay the day of the week
-     * @return a new {@link CalendarCell}
+     * @return a new {@link XCalendarCell}
      */
 
-    public static CalendarCell createWeekDay(String weekDay) {
-        CalendarCell result = new CalendarCell(weekDay);
+    public static XCalendarCell createWeekDay(String weekDay) {
+        XCalendarCell result = new XCalendarCell(weekDay);
         result.setText(weekDay);
         return result;
     }
@@ -110,11 +110,11 @@ public class CalendarCell extends WrapperView {
      * Creates a new CalendarCell suitable for representing a day.
      *
      * @param day the calendar day
-     * @return a new {@link CalendarCell}
+     * @return a new {@link XCalendarCell}
      */
 
-    public static CalendarCell createDay(String day) {
-        CalendarCell result = new CalendarCell(day);
+    public static XCalendarCell createDay(String day) {
+        XCalendarCell result = new XCalendarCell(day);
         result.setText(day);
         return result;
     }

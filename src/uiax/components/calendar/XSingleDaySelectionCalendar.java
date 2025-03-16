@@ -8,14 +8,14 @@ import uia.core.ui.style.Style;
 import uia.core.ui.View;
 
 import uiax.components.calendar.callbacks.OnSelectionCleared;
+import uiax.components.calendar.components.XAbstractCalendarView;
 import uiax.components.calendar.callbacks.OnDaySelected;
-import uiax.components.calendar.components.AbstractCalendarView;
 
 /**
  * Gregorian calendar with single day selection.
  */
 
-public class SingleDaySelectionCalendar extends AbstractCalendarView {
+public class XSingleDaySelectionCalendar extends XAbstractCalendarView {
     private final StyleFunction deselectedCellPaint = style -> style
             .setBackgroundColor(ColorCollection.TRANSPARENT)
             .setTextColor(ColorCollection.WHITE);
@@ -23,7 +23,7 @@ public class SingleDaySelectionCalendar extends AbstractCalendarView {
             .setBackgroundColor(ColorCollection.ROYAL_BLUE)
             .setTextColor(ColorCollection.WHITE);
 
-    public SingleDaySelectionCalendar(View view, String[] weekdays, String[] months) {
+    public XSingleDaySelectionCalendar(View view, String[] weekdays, String[] months) {
         super(view, weekdays, months);
 
         // updates day selection

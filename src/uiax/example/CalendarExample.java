@@ -7,9 +7,9 @@ import uia.application.ui.component.Component;
 import uia.core.context.Context;
 import uia.core.ui.ViewGroup;
 
-import uiax.components.calendar.components.AbstractCalendarView;
-import uiax.components.calendar.CalendarFactory;
-import uiax.components.calendar.CalendarView;
+import uiax.components.calendar.components.XAbstractCalendarView;
+import uiax.components.calendar.XCalendarFactory;
+import uiax.components.calendar.XCalendarView;
 
 /**
  * Demonstrative example. Creates and displays a calendar.
@@ -23,12 +23,12 @@ public class CalendarExample extends WrapperView {
         ));
 
         // creates the calendar
-        CalendarView calendar = CalendarFactory.create(
+        XCalendarView calendar = XCalendarFactory.create(
                 new Component("calendar", 0.5f, 0.5f, 0.5f, 0.5f),
                 true
         );
         calendar.getStyle().setAttribute(
-                AbstractCalendarView.STYLE_DAY_TASK_COLOR_MARKER,
+                XAbstractCalendarView.STYLE_DAY_TASK_COLOR_MARKER,
                 ColorCollection.YELLOW
         );
         calendar.markDayWithTask(1, true);

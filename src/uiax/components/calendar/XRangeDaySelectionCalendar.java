@@ -6,15 +6,15 @@ import uia.core.ui.style.StyleFunction;
 import uia.core.ui.style.Style;
 import uia.core.ui.View;
 
-import uiax.components.calendar.callbacks.OnDaySelected;
 import uiax.components.calendar.callbacks.OnSelectionCleared;
-import uiax.components.calendar.components.AbstractCalendarView;
+import uiax.components.calendar.components.XAbstractCalendarView;
+import uiax.components.calendar.callbacks.OnDaySelected;
 
 /**
  * Gregorian calendar with day range selection.
  */
 
-public class RangeDaySelectionCalendar extends AbstractCalendarView {
+public class XRangeDaySelectionCalendar extends XAbstractCalendarView {
     private final StyleFunction deselectedCellPaint = style -> style
             .setBackgroundColor(ColorCollection.TRANSPARENT)
             .setTextColor(ColorCollection.WHITE);
@@ -24,7 +24,7 @@ public class RangeDaySelectionCalendar extends AbstractCalendarView {
 
     private final int[] range = {-1, -1};
 
-    public RangeDaySelectionCalendar(View view, String[] weekdays, String[] months) {
+    public XRangeDaySelectionCalendar(View view, String[] weekdays, String[] months) {
         super(view, weekdays, months);
 
         // updates day selection

@@ -20,12 +20,12 @@ import uia.core.ui.View;
 import java.util.function.Consumer;
 
 /**
- * Subcomponent. CalendarHeader is a subcomponent of the calendar UI component.
+ * Calendar subcomponent.
  */
 
-public class CalendarHeader extends WrapperView {
+public class XCalendarHeader extends WrapperView {
 
-    public CalendarHeader(View view, Font font, Consumer<Boolean> onNextMonth) {
+    public XCalendarHeader(View view, Font font, Consumer<Boolean> onNextMonth) {
         super(new ComponentGroup(view));
         // group style
         Style groupStyle = getStyle();
