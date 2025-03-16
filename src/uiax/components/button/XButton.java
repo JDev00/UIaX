@@ -1,4 +1,4 @@
-package uiax.components;
+package uiax.components.button;
 
 import uia.application.ui.component.WrapperView;
 import uia.core.rendering.color.ColorCollection;
@@ -10,11 +10,11 @@ import uia.core.ui.View;
 import java.util.Objects;
 
 /**
- * Button has been developed as starting point for more complex widgets.
+ * The XButton has been developed as starting point for more complex widgets.
  * Its only behaviour is to switch on or off. By default, when clicked, it switches.
  */
 
-public final class UIButton extends WrapperView {
+public final class XButton extends WrapperView {
     /**
      * Button states.
      */
@@ -23,7 +23,7 @@ public final class UIButton extends WrapperView {
     private final StyleFunction[] stateStyle;
     private boolean enabled = false;
 
-    public UIButton(View view) {
+    public XButton(View view) {
         super(view);
         registerCallback((OnClick) touches -> enable(!isEnabled()));
 

@@ -1,4 +1,4 @@
-package uiax.components;
+package uiax.components.button;
 
 import uia.application.ui.component.utility.ComponentUtility;
 import uia.application.ui.component.text.ComponentText;
@@ -20,10 +20,10 @@ import uiax.colors.DarculaColorCollection;
 import java.util.Objects;
 
 /**
- * UIToggleButton is a toggle button with two states.
+ * The XToggleButton is a toggle button with two states.
  */
 
-public final class UIToggleButton extends WrapperView {
+public final class XToggleButton extends WrapperView {
 
     /**
      * Toggle button states.
@@ -37,7 +37,7 @@ public final class UIToggleButton extends WrapperView {
 
     private boolean firstState = true;
 
-    public UIToggleButton(View view) {
+    public XToggleButton(View view) {
         super(new ComponentGroup(view));
 
         registerCallback((OnClick) touches -> setState(isFirstState() ? State.SECOND : State.FIRST));

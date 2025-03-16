@@ -1,4 +1,4 @@
-package uiax.components;
+package uiax.components.button;
 
 import uia.application.ui.component.utility.ComponentUtility;
 import uia.application.ui.component.text.ComponentText;
@@ -16,14 +16,15 @@ import uia.core.ui.ViewText;
 import uia.core.ui.View;
 
 /**
- * Button with a text and an icon on the right or on the left.
+ * The XButtonFilled is a button with a text and an icon on
+ * the right or on the left.
  */
 
-public final class UIButtonFilled extends WrapperView {
+public final class XButtonFilled extends WrapperView {
     private final ViewText viewText;
     private final View icon;
 
-    public UIButtonFilled(View view, boolean right) {
+    public XButtonFilled(View view, boolean right) {
         super(new ComponentGroup(view));
         getStyle().setGeometry(
                 geometry -> ComponentUtility.buildRect(geometry, getWidth(), getHeight(), 1f),

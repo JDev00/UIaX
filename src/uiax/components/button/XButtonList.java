@@ -1,4 +1,4 @@
-package uiax.components;
+package uiax.components.button;
 
 import uia.application.ui.component.utility.ComponentUtility;
 import uia.application.ui.component.text.ComponentText;
@@ -24,10 +24,10 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * UIButtonList is a horizontally scrollable list of values.
+ * The XButtonList is a horizontally scrollable list of values.
  */
 
-public final class UIButtonList extends WrapperView {
+public final class XButtonList extends WrapperView {
 
     /**
      * Graphical elements that make up the UIButtonList component.
@@ -56,7 +56,7 @@ public final class UIButtonList extends WrapperView {
 
     private int currentValueIndex;
 
-    public UIButtonList(View view) {
+    public XButtonList(View view) {
         super(new ComponentGroup(view));
         getStyle()
                 .setTextAlignment(TextHorizontalAlignment.CENTER)
