@@ -10,7 +10,7 @@ import uia.core.ui.View;
 
 import uiax.components.list.positioner.ViewPositionerFactory;
 import uiax.components.list.positioner.ViewPositioner;
-import uiax.components.UIScrollbar;
+import uiax.components.bar.XScrollbar;
 
 import java.util.Iterator;
 
@@ -24,8 +24,8 @@ public final class UIListView extends WrapperView implements ViewGroup {
     private static final Color SCROLLBAR_BACKGROUND = Color.createColor(0, 0, 0, 110);
     private static final float SCROLLBAR_THICKNESS = 13f;
 
-    private final UIScrollbar horizontalBar;
-    private final UIScrollbar verticalBar;
+    private final XScrollbar horizontalBar;
+    private final XScrollbar verticalBar;
     private final ViewGroup containerGroup;
     private final ViewGroup viewsContainer;
     private ViewPositioner viewPositioner;
@@ -38,7 +38,7 @@ public final class UIListView extends WrapperView implements ViewGroup {
 
         viewPositioner = ViewPositionerFactory.create(this, 1.01f, true);
 
-        verticalBar = new UIScrollbar(
+        verticalBar = new XScrollbar(
                 new Component("vertical_scrollbar_" + getID(), 0f, 0f, 0f, 0.995f),
                 true
         );
@@ -49,7 +49,7 @@ public final class UIListView extends WrapperView implements ViewGroup {
                 .setMaxWidth(SCROLLBAR_THICKNESS)
                 .setMinWidth(SCROLLBAR_THICKNESS);
 
-        horizontalBar = new UIScrollbar(
+        horizontalBar = new XScrollbar(
                 new Component("horizontal_scrollbar_" + getID(), 0f, 0f, 0f, 0f),
                 false
         );

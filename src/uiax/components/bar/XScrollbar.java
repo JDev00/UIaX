@@ -1,4 +1,4 @@
-package uiax.components;
+package uiax.components.bar;
 
 import uia.application.message.systemessages.ScreenTouchMessage;
 import uia.application.message.messagingsystem.MessageLocker;
@@ -17,24 +17,23 @@ import uia.core.ui.ViewGroup;
 import uia.core.ui.View;
 
 /**
- * UIScrollbar represents a scrollbar component. It can be set vertical or horizontal at the creation time.
- * It consists of two graphical elements:
+ * The XScrollbar represents a scrollbar component. It consists of two elements:
  * <ul>
  *     <li>an external bar that is accessed and modified using the standard interface;</li>
  *     <li>an internal bar that represents the current scroll value.</li>
  * </ul>
  * The internal bar can't be accessed directly.
  * <br>
- * By design, UIScrollbar supports dragging and moving the internal bar. The operation you have to
+ * By design, XScrollbar supports dragging and moving the internal bar. The operation you have to
  * implement on your own is the scrolling caused by a mouse wheeling event.
  * <br>
  * The scroll value (accessed with {@link #getValue()}) is bounded between [0, max]. The maximum scroll value is set
  * with {@link #setMaxValue(float)}.
  *
- * @apiNote UIScrollbar doesn't fully support rotation, so rotate it carefully.
+ * @apiNote XScrollbar doesn't fully support rotation, so rotate it carefully.
  */
 
-public final class UIScrollbar extends WrapperView {
+public final class XScrollbar extends WrapperView {
     private final MessageLocker messageLocker = MessageLocker.getInstance();
 
     private final View internalBar;
@@ -46,7 +45,7 @@ public final class UIScrollbar extends WrapperView {
     private boolean locked = false;
     private boolean updateInternalBar = false;
 
-    public UIScrollbar(View view, boolean vertical) {
+    public XScrollbar(View view, boolean vertical) {
         super(new ComponentGroup(view));
 
         this.vertical = vertical;

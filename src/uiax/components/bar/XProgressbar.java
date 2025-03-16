@@ -1,4 +1,4 @@
-package uiax.components;
+package uiax.components.bar;
 
 import uia.application.ui.component.utility.ComponentUtility;
 import uia.application.ui.component.WrapperView;
@@ -13,11 +13,11 @@ import uia.core.ui.View;
 import java.util.Objects;
 
 /**
- * Progressbar is a widget used to display the progress of a task.
+ * The XProgressbar is a widget used to display the progress of a task.
  * <br>
  * It consists of two elements:
  * <ul>
- *     <li>an external bar that gives the progressbar its shape;</li>
+ *     <li>an external bar that gives the progress bar its shape;</li>
  *     <li>an internal bar that displays the progress.</li>
  * </ul>
  * <br>
@@ -25,14 +25,14 @@ import java.util.Objects;
  * @apiNote Designed to support rotation
  */
 
-public final class UIProgressbar extends WrapperView {
+public final class XProgressbar extends WrapperView {
     private final View internalBar;
 
     private float value;
     private float min;
     private float max;
 
-    public UIProgressbar(View view) {
+    public XProgressbar(View view) {
         super(new ComponentGroup(view));
         getStyle()
                 .setBackgroundColor(ColorCollection.DARK_GRAY)
@@ -41,7 +41,7 @@ public final class UIProgressbar extends WrapperView {
                         true
                 );
 
-        internalBar = new Component("PROGRESSBAR_INTERNAL_BAR_" + getID(), 0.5f, 0.5f, 1f, 1f);
+        internalBar = new Component("internal_bar_" + getID(), 0.5f, 0.5f, 1f, 1f);
         internalBar.getStyle()
                 .setBackgroundColor(ColorCollection.LIME)
                 .setGeometry(geometry -> {
@@ -69,7 +69,7 @@ public final class UIProgressbar extends WrapperView {
     }
 
     /**
-     * Set the progressbar value range
+     * Set the progress bar value range.
      *
      * @param min the minimum value
      * @param max the maximum value
@@ -84,9 +84,9 @@ public final class UIProgressbar extends WrapperView {
     }
 
     /**
-     * Set the progressbar value
+     * Set the progress bar value.
      *
-     * @param value the progressbar value between [min, max]
+     * @param value the progress bar value between [min, max]
      */
 
     public void setValue(float value) {
@@ -118,27 +118,27 @@ public final class UIProgressbar extends WrapperView {
     }
 
     /**
-     * Creates a new horizontal Progressbar based of the specified View
+     * Creates a new horizontal progress bar based of the specified View.
      *
      * @param view a not null {@link View}
      * @throws NullPointerException if {@code view == null}
      */
 
-    public static UIProgressbar createHorizontal(View view) {
+    public static XProgressbar createHorizontal(View view) {
         Objects.requireNonNull(view);
-        return new UIProgressbar(view);
+        return new XProgressbar(view);
     }
 
     /**
-     * Creates a new vertical Progressbar based of the specified View
+     * Creates a new vertical progress bar based of the specified View.
      *
      * @param view a not null {@link View}
      * @throws NullPointerException if {@code view == null}
      */
 
-    public static UIProgressbar createVertical(View view) {
+    public static XProgressbar createVertical(View view) {
         Objects.requireNonNull(view);
-        UIProgressbar result = new UIProgressbar(view);
+        XProgressbar result = new XProgressbar(view);
         result.getStyle().setRotation(-MathUtility.HALF_PI);
         return result;
     }
