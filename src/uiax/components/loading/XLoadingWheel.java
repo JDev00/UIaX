@@ -7,16 +7,16 @@ import uia.utility.MathUtility;
 import uia.core.ui.View;
 
 /**
- * UILoadingWheel represents a standard spinning wheel component.
+ * The XLoadingWheel represents a standard spinning wheel component.
  */
 
-public final class UILoadingWheel extends WrapperView {
+public final class XLoadingWheel extends WrapperView {
     public static final float THICKNESS = 0.04f;
     public static final float VELOCITY = 0.05f;
 
     private float rotation = 0f;
 
-    public UILoadingWheel(View view, float velocity, float thickness) {
+    public XLoadingWheel(View view, float velocity, float thickness) {
         super(view);
         setColliderPolicy(ColliderPolicy.AABB);
         getStyle().setGeometry(geometry -> {

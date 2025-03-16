@@ -12,7 +12,7 @@ import uia.core.ui.ViewGroup;
 import uia.core.ui.ViewText;
 import uia.core.ui.View;
 
-import uiax.components.list.UIListView;
+import uiax.components.list.XListView;
 
 /**
  * Demonstrative example. Creates and displays a scrollable list of items.
@@ -26,7 +26,7 @@ public class ScrollableList extends WrapperView {
         ));
 
         // creates the list of items
-        UIListView listView = new UIListView(
+        XListView listView = new XListView(
                 new Component("listview", 0.5f, 0.5f, 0.8f, 0.8f)
         );
         listView.getStyle()

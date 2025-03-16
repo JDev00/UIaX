@@ -15,12 +15,12 @@ import uiax.components.bar.XScrollbar;
 import java.util.Iterator;
 
 /**
- * UIListView has been designed to handle a list of views.
+ * The XListView has been designed to handle a list of views.
  * <br>
  * Specifically, it is a layout with vertical and horizontal scrollbars.
  */
 
-public final class UIListView extends WrapperView implements ViewGroup {
+public final class XListView extends WrapperView implements ViewGroup {
     private static final Color SCROLLBAR_BACKGROUND = Color.createColor(0, 0, 0, 110);
     private static final float SCROLLBAR_THICKNESS = 13f;
 
@@ -33,7 +33,7 @@ public final class UIListView extends WrapperView implements ViewGroup {
     private float barWidth = 0f;
     private float barHeight = 0f;
 
-    public UIListView(View view) {
+    public XListView(View view) {
         super(new ComponentGroup(view));
 
         viewPositioner = ViewPositionerFactory.create(this, 1.01f, true);
