@@ -1,7 +1,8 @@
 package uiax.components;
 
+import uia.application.message.systemessages.ScreenTouchMessage;
+import uia.application.message.messagingsystem.MessageLocker;
 import uia.application.ui.component.utility.ComponentUtility;
-import uia.application.message.EventTouchScreenMessage;
 import uia.application.ui.component.WrapperView;
 import uia.core.rendering.color.ColorCollection;
 import uia.application.ui.group.ComponentGroup;
@@ -34,6 +35,8 @@ import uia.core.ui.View;
  */
 
 public final class UIScrollbar extends WrapperView {
+    private final MessageLocker messageLocker = MessageLocker.getInstance();
+
     private final View internalBar;
     private float val;
     private float max = 1f;
@@ -93,7 +96,7 @@ public final class UIScrollbar extends WrapperView {
     }
 
     /**
-     * Send a message to request the event messages lock
+     * Requests to lock the touch messages.
      */
 
     private boolean requestLock() {
@@ -101,13 +104,13 @@ public final class UIScrollbar extends WrapperView {
         if (!locked) {
             result = true;
             locked = true;
-            sendMessage(EventTouchScreenMessage.requestLock(getID()));
+            messageLocker.requestLockOn(getID(), ScreenTouchMessage.class);
         }
         return result;
     }
 
     /**
-     * Send a message to release the event messages lock
+     * Releases the lock on the touch messages.
      */
 
     private boolean releaseLock() {
@@ -115,7 +118,7 @@ public final class UIScrollbar extends WrapperView {
         if (locked) {
             result = true;
             locked = false;
-            sendMessage(EventTouchScreenMessage.releaseLock(getID()));
+            messageLocker.releaseLockOn(ScreenTouchMessage.class);
         }
         return result;
     }
