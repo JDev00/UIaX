@@ -22,7 +22,7 @@ import java.util.Iterator;
 
 public final class UIListView extends WrapperView implements ViewGroup {
     private static final Color SCROLLBAR_BACKGROUND = Color.createColor(0, 0, 0, 110);
-    private static final float SCROLLBAR_THICKNESS = 15f;
+    private static final float SCROLLBAR_THICKNESS = 13f;
 
     private final UIScrollbar horizontalBar;
     private final UIScrollbar verticalBar;
@@ -194,7 +194,8 @@ public final class UIListView extends WrapperView implements ViewGroup {
         float offsetX = Math.max(0f, width / bounds[2]);
 
         barWidth = 1f / (offsetX + 1f);
-        horizontalBar.setVisible(barWidth < 1f);
+        // patch: fixes horizontal scrollbar from being displayed when not needed
+        horizontalBar.setVisible(barWidth < 0.995f);
 
         if (horizontalBar.isVisible()) {
             boolean verticalBarVisible = verticalBar.isVisible();
