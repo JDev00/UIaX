@@ -7,8 +7,8 @@ import uia.core.ui.style.StyleFunction;
 import uia.core.ui.style.Style;
 import uia.core.ui.View;
 
-import uiax.components.calendar.callbacks.OnSelectionCleared;
 import uiax.components.calendar.components.XAbstractCalendarView;
+import uiax.components.calendar.callbacks.OnSelectionCleared;
 import uiax.components.calendar.callbacks.OnDaySelected;
 
 /**
@@ -31,7 +31,11 @@ public class XSingleDaySelectionCalendar extends XAbstractCalendarView {
             boolean isDayAlreadySelected = isDayMarkedAsSelected(day);
             deselectAllDays();
             if (!isDayAlreadySelected) {
-                _selectDay(day);
+                // marks the selected day
+                markDayAsSelected(day, true);
+                setDayCellGeometry(day,
+                        geometry -> ComponentUtility.buildRect(geometry, getDayCelWidth(), getDayCelHeight(), 1f),
+                        true);
             }
             updateDayStyle();
         });
@@ -46,17 +50,6 @@ public class XSingleDaySelectionCalendar extends XAbstractCalendarView {
             setDayCellGeometry(i, GeometryCollection::rect, false);
             markDayAsSelected(i, false);
         }
-    }
-
-    /**
-     * Helper function. Selects the specified day.
-     */
-
-    private void _selectDay(int day) {
-        markDayAsSelected(day, true);
-        setDayCellGeometry(day,
-                geometry -> ComponentUtility.buildRect(geometry, getDayCelWidth(), getDayCelHeight(), 1f),
-                true);
     }
 
     /**
@@ -76,19 +69,13 @@ public class XSingleDaySelectionCalendar extends XAbstractCalendarView {
 
     @Override
     public void selectDay(int day) {
-        if (day < 1 || day > 31) {
-            throw new IllegalArgumentException("the day must be between [1, 31]. " + day + " provided");
-        }
-
+        validateDay(day, 1, 31);
         notifyCallbacks(OnDaySelected.class, day);
     }
 
     @Override
     public void deselectDay(int day) {
-        if (day < 1 || day > 31) {
-            throw new IllegalArgumentException("the day must be between [1, 31]. " + day + " provided");
-        }
-
+        validateDay(day, 1, 31);
         if (isDayMarkedAsSelected(day)) {
             notifyCallbacks(OnDaySelected.class, day);
         }
