@@ -75,7 +75,7 @@ public abstract class XAbstractCalendarView extends WrapperView implements XCale
                 font, shiftDate
         );
 
-        overlayCell = new Component("CALENDAR_OVERLAY_" + getID(), 0f, 0f, 0f, 0f);
+        overlayCell = new Component("calendar_cell_overlay_" + getID(), 0f, 0f, 0f, 0f);
         overlayCell.setInputConsumer(InputConsumer.SCREEN_TOUCH, false);
         overlayCell.setVisible(false);
         overlayCell.getStyle()
@@ -116,19 +116,32 @@ public abstract class XAbstractCalendarView extends WrapperView implements XCale
     }
 
     /**
-     * Helper function. Throws an error if the day is out of range.
+     * Helper method. Throws an error if the day is out of range.
      *
      * @param day the day to check
-     * @throws IndexOutOfBoundsException if {@code day < 1 || day > days of the month}
+     * @param min the minimum allowed day (included)
+     * @param max the maximum allowed day (included)
+     * @throws IllegalArgumentException if {@code day < min || day > max}
      */
 
-    private void validateDay(int day) {
+    protected void validateDay(int day, int min, int max) {
+        if (day < min || day > max) {
+            throw new IllegalArgumentException("the day must be between [" + min + ", " + max + "]. The given 'day' is " + day);
+        }
+    }
+
+    /**
+     * Helper method. Throws an error if the day is out of range.
+     *
+     * @param day the day to check
+     * @throws IllegalArgumentException if {@code day < 1 || day > days of the month}
+     */
+
+    protected void validateDay(int day) {
         int month = setDate[1];
         int year = setDate[2];
         int daysOfTheMonth = XCalendarUtility.getDaysOfTheMonth(month, year);
-        if (day < 1 || day > daysOfTheMonth) {
-            throw new IllegalArgumentException("the day must be between [1, " + daysOfTheMonth + "]");
-        }
+        validateDay(day, 1, daysOfTheMonth);
     }
 
     /**
@@ -136,38 +149,48 @@ public abstract class XAbstractCalendarView extends WrapperView implements XCale
      *
      * @param day      the day to be marked between [1, 31]
      * @param selected true to mark the day as selected
-     * @throws NullPointerException if {@code day < 1 || day > 31}
+     * @throws IllegalArgumentException if {@code day < 1 || day > 31}
      */
 
     protected void markDayAsSelected(int day, boolean selected) {
-        validateDay(day);
+        validateDay(day, 1, 31);
         cells[7 + day - 1].selected = selected;
     }
 
     /**
+     * @param day the day between [1, 31] to be checked
      * @return true if the specified day is marked as selected
-     * @throws NullPointerException if {@code day < 1 || day > 31}
+     * @throws IllegalArgumentException if {@code day < 1 || day > 31}
      */
 
     protected boolean isDayMarkedAsSelected(int day) {
-        validateDay(day);
+        validateDay(day, 1, 31);
         return cells[7 + day - 1].selected;
     }
 
     /**
-     * Sets the day geometry.
+     * Sets the geometry for the specified calendar cell.
+     *
+     * @param day            the day used to identify the calendar cell
+     * @param builder        the function used to create the cell geometry
+     * @param inTimeBuilding true to force the system to rebuild the geometry every frame
+     * @throws IllegalArgumentException if {@code day < 1 || day > 31}
      */
 
     protected void setDayCellGeometry(int day,
                                       Consumer<Geometry> builder, boolean inTimeBuilding) {
+        validateDay(day, 1, 31);
         cells[7 + day - 1].getStyle().setGeometry(builder, inTimeBuilding);
     }
 
     /**
+     * @param day the day used to identify the cell to get the style for
      * @return the Style associated to the specified day
+     * @throws IllegalArgumentException if {@code day < 1 || day > 31}
      */
 
     protected Style getDayCellStyle(int day) {
+        validateDay(day, 1, 31);
         return cells[7 + day - 1].getStyle();
     }
 
@@ -194,7 +217,7 @@ public abstract class XAbstractCalendarView extends WrapperView implements XCale
     }
 
     /**
-     * Helper function. Marks the current date cell.
+     * Helper method. Marks the current date cell.
      *
      * @param day the day between [1, 31]
      */
