@@ -6,8 +6,8 @@ import uia.core.ui.style.StyleFunction;
 import uia.core.ui.style.Style;
 import uia.core.ui.View;
 
-import uiax.components.calendar.callbacks.OnSelectionCleared;
 import uiax.components.calendar.components.XAbstractCalendarView;
+import uiax.components.calendar.callbacks.OnSelectionCleared;
 import uiax.components.calendar.callbacks.OnDaySelected;
 
 /**
@@ -36,9 +36,7 @@ public class XRangeDaySelectionCalendar extends XAbstractCalendarView {
 
     @Override
     public void selectDay(int day) {
-        if (day < 1 || day > 31) {
-            throw new IllegalArgumentException("the day must be between [1, 31]. " + day + " provided");
-        }
+        validateDay(day, 1, 31);
         notifyCallbacks(OnDaySelected.class, day);
     }
 
