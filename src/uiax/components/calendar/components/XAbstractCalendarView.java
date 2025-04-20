@@ -116,7 +116,7 @@ public abstract class XAbstractCalendarView extends WrapperView implements XCale
     }
 
     /**
-     * Helper method. Throws an error if the day is out of range.
+     * Helper method. Checks if the given day is between [min, max].
      *
      * @param day the day to check
      * @param min the minimum allowed day (included)
@@ -131,15 +131,15 @@ public abstract class XAbstractCalendarView extends WrapperView implements XCale
     }
 
     /**
-     * Helper method. Throws an error if the day is out of range.
+     * Helper method. Checks if the given day is between [1, days of the month].
      *
      * @param day the day to check
      * @throws IllegalArgumentException if {@code day < 1 || day > days of the month}
      */
 
     protected void validateDay(int day) {
-        int month = setDate[1];
-        int year = setDate[2];
+        int month = currentDate[1];
+        int year = currentDate[2];
         int daysOfTheMonth = XCalendarUtility.getDaysOfTheMonth(month, year);
         validateDay(day, 1, daysOfTheMonth);
     }
@@ -270,19 +270,20 @@ public abstract class XAbstractCalendarView extends WrapperView implements XCale
 
     @Override
     public void setDate(int day, int month, int year) {
-        validateDay(day);
+        // 1. validates the date
+        int daysOfTheMonth = XCalendarUtility.getDaysOfTheMonth(month, year);
+        validateDay(day, 1, daysOfTheMonth);
         if (month < 1 || month > 12) {
             throw new IllegalArgumentException("the month must be between [1, 12]");
         }
 
-        // sets the calendar date
+        // 2. sets the calendar date
         setDate[0] = day;
         setDate[1] = month;
         setDate[2] = year;
-
         updateDate(day, month, year);
 
-        // notifies clients
+        // 3. notifies clients
         int[] date = getDate();
         notifyCallbacks(OnDateSet.class, date);
     }

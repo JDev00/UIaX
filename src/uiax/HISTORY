@@ -1,4 +1,10 @@
-UIaX current version is 2.0.1
+UIaX current version is 2.0.2
+
+################
+Version 2.0.2
+################
+
+* Bugfix: toggles marks on calendar day cell
 
 ################
 Version 2.0.1

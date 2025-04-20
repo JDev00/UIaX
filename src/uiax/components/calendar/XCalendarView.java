@@ -99,7 +99,7 @@ public interface XCalendarView extends View {
      *
      * @param day     the day between [1, days of the month] to be marked or unmarked
      * @param hasTask true to mark the day; false to leave the mark to it
-     * @throws IndexOutOfBoundsException if {@code day < 1 || day > days of the month}
+     * @throws IllegalArgumentException if {@code day < 1 || day > days of the month}
      */
 
     void markDayWithTask(int day, boolean hasTask);
@@ -109,7 +109,7 @@ public interface XCalendarView extends View {
      *
      * @param day the day between [1, days of the month] to check the mark for
      * @return true if the day is marked; false otherwise
-     * @throws IndexOutOfBoundsException if {@code day < 1 || day > days of the month}
+     * @throws IllegalArgumentException if {@code day < 1 || day > days of the month}
      */
 
     boolean hasTask(int day);
